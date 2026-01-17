@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wytwórnia Serwerów</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #ff0054;
+            --primary-dark: #cc0044;
+            --secondary-color: #2c2c2c;
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --card-bg: #fcfcfc;
+            --border-color: #e0e0e0;
+            /* Powrót do czcionki VT323 */
+            --minecraft-font: 'VT323', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            padding-top: 90px;
+        }
+
+        h1, h2, h3, .mc-font, .btn, .price, .logo-text, .nav-link-custom {
+            font-family: var(--minecraft-font);
+            letter-spacing: 1px;
+        }
+
+        /* --- ANIMACJE --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- GÓRNA NAWIGACJA --- */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 4px solid var(--primary-color);
+            height: 90px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Logo */
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+
+        .logo-img {
+            height: 50px;
+            transition: transform 0.3s;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            /* Powiększone dla VT323 */
+            margin-left: 15px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .logo a:hover .logo-img { transform: scale(1.1) rotate(-5deg); }
+        .logo a:hover .logo-text { color: var(--primary-color); }
+
+        /* Wyszukiwarka */
+        .search-box {
+            position: relative;
+            width: 25%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 0;
+            font-family: var(--minecraft-font);
+            font-size: 1.2rem;
+            background: #f5f5f5;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 0, 84, 0.2);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-top: none;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .search-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-family: var(--minecraft-font);
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .search-item:hover {
+            background-color: #fff0f5;
+            color: var(--primary-color);
+        }
+
+        /* Linki w menu */
+        .top-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            font-family: var(--minecraft-font);
+            cursor: pointer;
+        }
+
+        .menu-link:hover { color: var(--primary-color); }
+
+        /* --- HERO --- */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #fff 0%, #fff0f5 100%);
+            margin-bottom: 20px;
+        }
+
+        .hero-logo {
+            max-width: 250px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            text-shadow: 3px 3px 0px #000;
+            margin: 10px 0;
+        }
+
+        /* --- ZAKŁADKI KATEGORII (tylko produkty) --- */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: white;
+            border: 2px solid var(--secondary-color);
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            font-family: var(--minecraft-font);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            color: var(--secondary-color);
+            min-width: 140px;
+            text-align: center;
+            box-shadow: 4px 4px 0px #ccc;
+        }
+
+        .cat-btn:hover { transform: translateY(-2px); }
+
+        .cat-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 4px 4px 0px #000;
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTENT --- */
+        .section-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        .section-content.active { display: block; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section-header h2 { font-size: 2.5rem; color: #333; margin-bottom: 10px; }
+        .section-header p { color: #666; font-family: sans-serif; }
+
+        /* --- GRID PRODUKTÓW --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card.highlight-search {
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(255, 0, 84, 0.4);
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        /* CIEMNIEJSZE TŁO NAGŁÓWKA KARTY */
+        .card-header {
+            padding: 15px;
+            background: #111;
+            color: white;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .card-body { padding: 20px; flex-grow: 1; text-align: center; }
+
+        .card-img-placeholder {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        .features-list { list-style: none; text-align: left; }
+        .features-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.1rem;
+            color: #444;
+            font-family: var(--minecraft-font);
+        }
+        .features-list li::before {
+            content: '>';
+            font-family: var(--minecraft-font);
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .card-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .buy-btn {
+            background: var(--primary-color);
+            color: white;
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-decoration: none;
+            font-family: var(--minecraft-font);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px var(--primary-dark);
+            transition: 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+        .buy-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--primary-dark);
+        }
+
+        .img-preview { width: 100%; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 15px; }
+
+        /* Badge */
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 4px 8px;
+            font-size: 1rem;
+            font-family: var(--minecraft-font);
+            border: 2px solid white;
+            z-index: 2;
+        }
+
+        /* --- STYL DLA PŁATNOŚCI I JAK ZAMAWIAĆ (WSPÓLNY STYL KART) --- */
+        .info-card-container {
+            max-width: 800px;
+            margin: 0 auto; 
+            padding-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: white;
+            border: 2px solid #eee;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .info-card:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .info-icon {
+            background: var(--primary-color);
+            color: white;
+            font-family: var(--minecraft-font);
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: 3px 3px 0 #000;
+        }
+
+        .info-content h4 { 
+            margin-bottom: 5px;
+            font-size: 1.5rem; 
+            font-family: var(--minecraft-font);
+            color: #333;
+        }
+        
+        .info-content .conversion-rate {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+            font-family: var(--minecraft-font);
+        }
+
+        .info-content p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .step-img {
+            max-width: 100%;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* Regulamin Style */
+        .rules-list {
+            list-style: decimal;
+            padding-left: 20px;
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .rules-list li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #fff;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* --- OPINIE (TESTIMONIALS) --- */
+        .testimonials-section {
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 2px solid #eee;
+            background: #fafafa;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border: 2px solid #eee;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 15px;
+            background: #ddd;
+        }
+
+        .testimonial-name {
+            font-family: var(--minecraft-font);
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-desc {
+            font-size: 0.95rem;
+            color: #666;
+            font-style: italic;
+            line-height: 1.4;
+        }
+        
+        .quote-icon {
+            color: #eee;
+            font-size: 2rem;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+
+        /* --- POPUP (MODAL) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background-color: #fefefe;
+            border: 4px solid var(--secondary-color);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: #111;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title { font-family: var(--minecraft-font); font-size: 1.8rem; }
+        
+        .close-modal {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-modal:hover { color: var(--primary-color); }
+
+        .modal-body { padding: 20px; overflow-y: auto; }
+
+        .modal-img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            background: #eee;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .modal-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .modal-price {
+            font-family: var(--minecraft-font);
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .qty-selector { display: flex; align-items: center; gap: 10px; }
+        .qty-box {
+            border: 2px solid #333;
+            padding: 5px 15px;
+            font-family: var(--minecraft-font);
+            font-size: 1.4rem;
+            background: #eee;
+        }
+
+        .modal-tutorial-mini {
+            background: #fff0f5;
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .modal-tutorial-mini h5 { margin-bottom: 5px; color: var(--primary-color); font-size: 1.2rem; font-family: var(--minecraft-font); }
+        .modal-tutorial-mini ol { margin-left: 20px; }
+
+        @media (max-width: 900px) {
+            .nav-content { flex-direction: column; gap: 10px; padding: 10px; }
+            nav { height: auto; position: relative; padding: 10px 0; }
+            body { padding-top: 0; }
+            .search-box { width: 100%; order: 3; max-width: 100%; }
+            .top-links { width: 100%; justify-content: center; order: 2; margin-bottom: 10px; flex-wrap: wrap; }
+            .logo { order: 1; }
+            .info-card { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="#" onclick="window.scrollTo(0,0)">
+                    <img src="https://imgur.com/FuiWh71.png" alt="Logo" class="logo-img">
+                    <span class="logo-text">Wytwórnia Serwerów</span>
+                </a>
+            </div>
+
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Szukaj...">
+                <div id="searchResults" class="search-results"></div>
+            </div>
+
+            <div class="top-links">
+                <a class="menu-link" onclick="switchCategory('payments')">Płatności</a>
+                <a class="menu-link" onclick="switchCategory('rules')">Regulamin</a>
+                <a class="menu-link" onclick="switchCategory('howto')">Jak zamawiać?</a>
+            </div>
+            
+            </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <img src="https://imgur.com/NqNTv8x.png" alt="Pełne Logo" class="hero-logo">
+            <h1>WYTWÓRNIA SERWERÓW</h1>
+            <p>Najlepsze rozwiązania dla Twojej społeczności.</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="category-tabs">
+            <button class="cat-btn active" onclick="switchCategory('discord')">Serwery DC</button>
+            <button class="cat-btn" onclick="switchCategory('thumbnails')">Miniaturki</button>
+            <button class="cat-btn" onclick="switchCategory('scripts')">Skrypty MC</button>
+        </div>
+
+        <section id="discord" class="section-content active">
+            <div class="section-header">
+                <h2>Gotowe Paczki Discord</h2>
+                <p>Ikona Discord oznacza profesjonalne przygotowanie.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card" id="prod-starter">
+                    <div class="card-header"><h3>Starter</h3></div>
+                    <div class="card-body">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
+                        <div class="price">500k</div>
+                        <ul class="features-list">
+                            <li>Podstawowa konfiguracja</li>
+                            <li>Weryfikacja, role, uprawnienia</li>
+                            <li>Podstawowe zabezpieczenia</li>
+                            <li>Uproszczony panel ticketów</li>
+                            <li>System powitań</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+                <div class="card" id="prod-standard">
+                    <div class="badge">POPULARNE</div>
+                    <div class="card-header"><h3>Standard</h3></div>
+                    <div class="card-body">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
+                        <div class="price">1 MLN</div>
+                        <ul class="features-list">
+                            <li>Wszystko ze Startera</li>
+                            <li>Rozbudowane kanały</li>
+                            <li>Kanał changelog</li>
+                            <li>Więcej kanałów 4fun</li>
+                            <li>Lepsze zabezpieczenia</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+                <div class="card" id="prod-standardplus">
+                    <div class="card-header"><h3>Standard+</h3></div>
+                    <div class="card-body">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
+                        <div class="price">3.5 MLN</div>
+                        <ul class="features-list">
+                            <li>System partnerstw</li>
+                            <li>Bump + konfiguracja</li>
+                            <li>Kanał głosowy (create)</li>
+                            <li>Zaawansowane role</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+                <div class="card" id="prod-premium">
+                    <div class="card-header"><h3>Premium</h3></div>
+                    <div class="card-body">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
+                        <div class="price">10 MLN</div>
+                        <ul class="features-list">
+                            <li>Zaawansowany panel ticketów</li>
+                            <li>System "Wprowadzenie"</li>
+                            <li><strong>Grafiki od grafika</strong></li>
+                            <li>Pełna personalizacja</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+                <div class="card" id="prod-deluxe">
+                    <div class="badge" style="background:gold; color:black;">VIP</div>
+                    <div class="card-header"><h3>Deluxe</h3></div>
+                    <div class="card-body">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
+                        <div class="price">20 MLN</div>
+                        <ul class="features-list">
+                            <li>Wszystko z Premium</li>
+                            <li>Zaawansowana weryfikacja</li>
+                            <li>Bump + Bump Dzik</li>
+                            <li>Zaawansowane grafiki</li>
+                            <li><strong>Autorski BOT!</strong></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="thumbnails" class="section-content">
+            <div class="section-header">
+                <h2>Miniaturki</h2>
+                <p>Przyciągnij widzów profesjonalnym wyglądem</p>
+            </div>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+                
+                <div class="card" id="prod-mini-prosta">
+                    <div class="card-header"><h3>Miniaturka Prosta</h3></div>
+                    <div class="card-body">
+                        <img src="https://imgur.com/Odc9Qnz.png" alt="Prosta" class="img-preview product-img-source">
+                        <div class="price">500 K</div>
+                        <p>Czysty design, czytelne napisy. Idealna na start.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+                <div class="card" id="prod-mini-prof">
+                    <div class="card-header"><h3>Miniaturka PRO</h3></div>
+                    <div class="card-body">
+                        <img src="https://imgur.com/RV41Sh2.png" alt="Profesjonalna" class="img-preview product-img-source">
+                        <div class="price">1,3 MLN</div>
+                        <p>Zaawansowane cieniowanie, efekty świetlne, renderowanie 3D.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="scripts" class="section-content">
+            <div class="section-header">
+                <h2>Skrypty Skript (.sk)</h2>
+                <p>Automatyzacja i unikalne funkcje na Twój serwer MC</p>
+            </div>
+            <div class="grid">
+                
+                <div class="card" id="prod-skrypt-login">
+                    <div class="card-header"><h3>Logowanie v1.1</h3></div>
+                    <div class="card-body">
+                        <img src="https://imgur.com/cDZhMvI.png" class="card-img-placeholder product-img-source">
+                        <div class="price">2 MLN</div>
+                        <ul class="features-list">
+                            <li>/login, /register, /zmien_haslo</li>
+                            <li>Ochrona przed botami</li>
+                            <li>Konfigurowalne wiadomości</li>
+                            <li>Auto-kick</li>
+                        </ul>
+                        <p style="font-size:0.8rem; margin-top:10px;">Wymagania: Plugin Skript</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+                <div class="card" id="prod-skrypt-custom">
+                    <div class="card-header"><h3>Skrypt na Zamówienie</h3></div>
+                    <div class="card-body">
+                        <img src="https://imgur.com/cDZhMvI.png" class="card-img-placeholder product-img-source">
+                        <div class="price">6.5 MLN</div>
+                        <ul class="features-list">
+                            <li>Realizacja wg Twojego opisu</li>
+                            <li>Czas: 2-5 dni</li>
+                            <li>Pełne wsparcie</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="howto" class="section-content">
+            <div class="section-header">
+                <h2>Jak zamawiać?</h2>
+                <p>Postępuj zgodnie z instrukcją, aby zrealizować zamówienie</p>
+            </div>
+            
+            <div class="info-card-container">
+                
+                <div class="info-card">
+                    <div class="info-icon">1</div>
+                    <div class="info-content">
+                        <h4>Dołącz na Discorda</h4>
+                        <p>Wejdź na nasz serwer Discord: <a href="https://dc.gg/wytworniaserwerow" style="color:var(--primary-color); font-weight:bold;">dc.gg/wytworniaserwerow</a></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">2</div>
+                    <div class="info-content">
+                        <h4>Znajdź katalog</h4>
+                        <p>Wejdź na dowolny kanał z katalogami produktów, np. <strong>katalog-serwerów</strong>.</p>
+                        <img src="https://imgur.com/dKuLpD0.png" alt="Katalog" class="step-img">
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">3</div>
+                    <div class="info-content">
+                        <h4>Znajdź kanał zamówień</h4>
+                        <p>Gdy już wybierzesz pakiet, wejdź do kanału <strong>zamówienia</strong> w tej samej kategorii.</p>
+                        <img src="https://imgur.com/YwG7h25.png" alt="Zamówienia" class="step-img">
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">4</div>
+                    <div class="info-content">
+                        <h4>Stwórz Ticket</h4>
+                        <p>Kliknij przycisk tworzenia ticketa i poczekaj na odpowiedź od administracji. Opisz w nim, który produkt wybrałeś.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="payments" class="section-content">
+            <div class="section-header">
+                <h2>Płatności</h2>
+                <p>Wymiana walut z innych gier i trybów</p>
+            </div>
+            <div class="container info-card-container">
+                
+                <div style="background:#fff3cd; border:2px solid #ffeeba; padding:15px; border-radius:4px; text-align:center;">
+                    Nie grasz w Minecrafta na serwerze anarchia.gg na trybie oneblock? Nie ma sprawy!
+                    Poniżej znajduje się cennik dla innych gier.
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background:#000;"><i class="fas fa-shapes"></i></div>
+                    <div class="info-content">
+                        <h4>ROBLOX - Robux</h4>
+                        <span class="conversion-rate">1 MLN (OneBlock) = 70 Robux</span>
+                        <p>Możesz zapłacić walutą Robux. Przelicznik jest stały.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background:#8b0000;"><i class="fas fa-heart"></i></div>
+                    <div class="info-content">
+                        <h4>Anarchia.gg - Lifesteal</h4>
+                        <span class="conversion-rate">1 MLN (OneBlock) = 1k $ (Lifesteal)</span>
+                        <p>Płatność walutą z trybu Lifesteal na serwerze Anarchia.gg.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background:#483D8B;"><i class="fas fa-cube"></i></div>
+                    <div class="info-content">
+                        <h4>Anarchia.gg - BoxPvP</h4>
+                        <span class="conversion-rate">1 MLN (OneBlock) = 120k $ (BoxPvP)</span>
+                        <p>Płatność walutą z trybu BoxPvP na serwerze Anarchia.gg.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background:#28a745;"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="info-content">
+                        <h4>Kupno przedmiotu (ItemShop)</h4>
+                        <span class="conversion-rate">1 MLN (OneBlock) = 2 PLN w sklepie</span>
+                        <p>Kupujesz przedmiot (np. Klucze) na nick administratora/wykonawcy. <br>
+                        <em>Przykład: Kupujesz serwer za 1mln -> Kupujesz 1 rzadki klucz w itemshopie za 2zł.</em></p><br><p><b>W przypadku zakupu produktów o wartości poniżej 1 mln, przy wykorzystaniu tej metody płatności, cena pozostaje bez zmian. Przykładowo, kupując Serwer Starter o wartości 500K, koszt wynosi 2 PLN.</b></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="rules" class="section-content">
+            <div class="section-header">
+                <h2>Regulamin Zamówień</h2>
+                <p>Zasady obowiązujące podczas zakupów</p>
+            </div>
+            <ol class="rules-list">
+                <li><strong>Składanie zamówienia:</strong> Zamówienia przyjmujemy wyłącznie poprzez system ticketów na naszym serwerze Discord.</li>
+                <li><strong>Płatność:</strong> Płatność pobierana jest z góry (przed rozpoczęciem prac) lub w transzach, zależnie od ustaleń z Administratorem.</li>
+                <li><strong>Czas realizacji:</strong> Standardowy czas realizacji wynosi od 2 do 5 dni roboczych. W przypadku skomplikowanych zamówień czas może się wydłużyć.</li>
+                <li><strong>Zwroty:</strong> Po przekazaniu produktu (paczki, miniaturki, skryptu) zwroty nie są przyjmowane. W przypadku rezygnacji w trakcie prac, zwrot wynosi 50%.</li>
+                <li><strong>Kultura:</strong> W ticketach obowiązuje pełna kultura. Wyzywanie lub spamowanie skutkuje zamknięciem zgłoszenia bez realizacji.</li>
+                <li><strong>Waluta:</strong> Główną walutą jest kasa na Anarchia.gg (OneBlock). Przeliczniki na inne waluty znajdują się w zakładce Płatności.</li>
+            </ol>
+        </section>
+
+        <div class="testimonials-section">
+            <div class="section-header">
+                <h2>Zaufali nam</h2>
+                <p></p>
+            </div>
+            <div class="grid testimonials-grid">
+                
+
+
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <img src="https://imgur.com/n571BdY.png" alt="Avatar" class="testimonial-avatar">
+                    <h3 class="testimonial-name">Gierkauboba</h3>
+                    <p class="testimonial-desc">Youtuber 350+ subskrypcji</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <img src="https://imgur.com/Q2CmKDG.png" alt="Avatar" class="testimonial-avatar">
+                    <h3 class="testimonial-name">Soniczek929</h3>
+                    <p class="testimonial-desc">Youtuber 350+ subskrypcji</p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <h2 class="mc-font" style="margin-bottom:10px;">Wytwórnia Serwerów</h2>
+            <p>Tworzymy z pasją dla graczy.</p>
+            <div style="margin: 20px 0;">
+                <a onclick="switchCategory('rules')" style="color:white; margin:0 10px; cursor:pointer;">Regulamin</a>
+                <a onclick="switchCategory('howto')" style="color:white; margin:0 10px; cursor:pointer;">Kontakt</a>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2024 Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalTitle" class="modal-title">Nazwa Produktu</span>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+        
+            <div class="modal-body">
+                <img id="modalImg" src="" alt="Produkt" class="modal-img">
+                
+                <div class="modal-price-row">
+                    <div id="modalPrice" class="modal-price">0 PLN</div>
+                    <div class="qty-selector">
+                        <span>Ilość:</span>
+                        <span class="qty-box">1</span>
+                    </div>
+                </div>
+
+                <div id="modalDesc" class="modal-desc"></div>
+
+                <div class="modal-tutorial-mini">
+                    <h5>Jak kupić?</h5>
+                    <ol>
+                        <li>Wejdź na Discord <a href="https://dc.gg/wytworniaserwerow">dc.gg/wytworniaserwerow</a></li>
+                        <li>Znajdź odpowiedni kanał "zamówienia"</li>
+                        <li>Stwórz ticket i napisz co chcesz kupić</li>
+                    </ol>
+                </div>
+
+                <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" style="text-align: center;">
+                    ZAMÓW NA DISCORD
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- LOGIKA SKLEPU ---
+        const products = [
+            { name: "Serwer Starter", id: "prod-starter", category: "discord" },
+            { name: "Serwer Standard", id: "prod-standard", category: "discord" },
+            { name: "Serwer Standard+", id: "prod-standardplus", category: "discord" },
+            { name: "Serwer Premium", id: "prod-premium", category: "discord" },
+            { name: "Serwer Deluxe (BOT)", id: "prod-deluxe", category: "discord" },
+            { name: "Miniaturka Prosta", id: "prod-mini-prosta", category: "thumbnails" },
+            { name: "Miniaturka Profesjonalna", id: "prod-mini-prof", category: "thumbnails" },
+            { name: "Skrypt Logowanie", id: "prod-skrypt-login", category: "scripts" },
+            { name: "Skrypt na Zamówienie", id: "prod-skrypt-custom", category: "scripts" }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            searchResults.innerHTML = '';
+            
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+
+            if (filtered.length > 0) {
+                searchResults.style.display = 'block';
+                filtered.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'search-item';
+                    div.innerHTML = `${p.name} <span class="cat">${p.category}</span>`;
+                    div.onclick = () => goToProduct(p.id, p.category);
+                    searchResults.appendChild(div);
+                });
+            } else {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-box')) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        function goToProduct(elementId, category) {
+            switchCategory(category);
+            searchInput.value = '';
+            searchResults.style.display = 'none';
+
+            setTimeout(() => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    element.classList.add('highlight-search');
+                    setTimeout(() => element.classList.remove('highlight-search'), 2000);
+                }
+            }, 100);
+        }
+
+        function switchCategory(catId) {
+            document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(catId).classList.add('active');
+            
+            // Obsługa przycisków kategorii (tylko jeśli istnieją dla danej sekcji)
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            const btns = Array.from(document.querySelectorAll('.cat-btn'));
+            const activeBtn = btns.find(b => b.getAttribute('onclick').includes(catId));
+            if(activeBtn) activeBtn.classList.add('active');
+            
+            window.scrollTo(0, 400);
+        }
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('productModal');
+        
+        function openModal(btnElement) {
+            const card = btnElement.closest('.card');
+            const title = card.querySelector('.card-header h3').innerText;
+            
+            let price = "Do ustalenia";
+            const priceEl = card.querySelector('.price');
+            if(priceEl) price = priceEl.innerText;
+
+            const bodyContent = card.querySelector('.card-body').cloneNode(true);
+            
+            const clonedPrice = bodyContent.querySelector('.price');
+            if(clonedPrice) clonedPrice.remove();
+            
+            const clonedImg = bodyContent.querySelector('.product-img-source');
+            let imgSrc = "https://imgur.com/FuiWh71.png";
+            if(clonedImg) {
+                imgSrc = clonedImg.src;
+                clonedImg.remove();
+            }
+
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalImg').src = imgSrc;
+            
+            const modalDesc = document.getElementById('modalDesc');
+            modalDesc.innerHTML = '';
+            modalDesc.appendChild(bodyContent);
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
