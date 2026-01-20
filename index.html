@@ -642,9 +642,10 @@
                 <a class="menu-link" onclick="switchCategory('payments')">Płatności</a>
                 <a class="menu-link" onclick="switchCategory('rules')">Regulamin</a>
                 <a class="menu-link" onclick="switchCategory('howto')">Jak zamawiać?</a>
+                <a class="menu-link" onclick="switchCategory('collab')">Współpraca</a>
             </div>
             
-            </div>
+        </div>
     </nav>
 
     <header>
@@ -666,7 +667,7 @@
         <section id="discord" class="section-content active">
             <div class="section-header">
                 <h2>Gotowe Paczki Discord</h2>
-                <p></p>
+                <p>Wybierz pakiet idealny dla siebie</p>
             </div>
 
             <div class="grid">
@@ -840,6 +841,66 @@
             </div>
         </section>
 
+        <section id="collab" class="section-content">
+            <div class="section-header">
+                <h2>Program Współpracy</h2>
+                <p>Zostań Twórcą i korzystaj ze specjalnych przywilejów</p>
+            </div>
+
+            <div class="info-card-container">
+                <div class="info-card">
+                    <div class="info-icon" style="background: var(--secondary-color);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Ranga "Twórca"</h4>
+                        <p>Poszukujemy ambitnych osób, które chcą rozwijać swoje kanały razem z Wytwórnią Serwerów. Jeśli tworzysz content na YouTube, mamy dla Ciebie ofertę specjalną.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background: gold; color: #333;"><i class="fas fa-gift"></i></div>
+                    <div class="info-content">
+                        <h4>Twoje Korzyści</h4>
+                        <ul class="features-list" style="margin-top: 10px;">
+                            <li><strong>-20%</strong> zniżki na wszystkie Miniaturki</li>
+                            <li><strong>-20%</strong> zniżki na wszystkie Skrypty MC</li>
+                            <li><strong>-5%</strong> zniżki na wszystkie Serwery Discord</li>
+                            <li>Wyróżniająca ranga na naszym Discordzie</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background:#cc0044;"><i class="fab fa-youtube"></i></div>
+                    <div class="info-content">
+                        <h4>Wymagania Minimalne</h4>
+                        <ul class="features-list" style="margin-top: 10px;">
+                            <li>Aktywna działalność na <strong>YouTube</strong></li>
+                            <li>Minimum <strong>200 subskrypcji</strong></li>
+                            <li>Regularne transmisje Live (min. raz na 2 tygodnie)</li>
+                            <li>Wyświetlanie naszego GIFa reklamowego podczas Live</li>
+                            <li>Umieszczenie linku do Wytwórni w opisie transmisji</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background:#28a745;"><i class="fas fa-check-double"></i></div>
+                    <div class="info-content">
+                        <h4>Jak odebrać rangę?</h4>
+                        <p>Jeśli spełniasz wszystkie wymagania i przeprowadziłeś już co najmniej jeden Live z naszą reklamą:</p>
+                        <ol style="margin: 10px 0 10px 20px; font-family: sans-serif;">
+                            <li>Wejdź na nasz Discord.</li>
+                            <li>Stwórz <strong>Ticket</strong>.</li>
+                            <li>Wyślij link do swojego kanału oraz dowód (screen/link) z transmisji.</li>
+                        </ol>
+                        <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" style="text-align:center; margin-top:15px; text-decoration:none;">ZGŁOŚ SIĘ PO RANGĘ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="howto" class="section-content">
             <div class="section-header">
                 <h2>Jak zamawiać?</h2>
@@ -893,8 +954,7 @@
             <div class="container info-card-container">
                 
                 <div style="background:#fff3cd; border:2px solid #ffeeba; padding:15px; border-radius:4px; text-align:center;">
-                    Nie grasz w Minecrafta na serwerze anarchia.gg na trybie oneblock? Nie ma sprawy!
-                    Poniżej znajduje się cennik dla innych gier.
+                    Nie grasz w Minecrafta na serwerze anarchia.gg na trybie oneblock? Nie ma sprawy! Poniżej znajduje się cennik dla innych gier.
                 </div>
 
                 <div class="info-card">
@@ -959,13 +1019,11 @@
             </div>
             <div class="grid testimonials-grid">
                 
-
-
                 <div class="testimonial-card">
                     <i class="fas fa-quote-left quote-icon"></i>
                     <img src="https://imgur.com/n571BdY.png" alt="Avatar" class="testimonial-avatar">
                     <h3 class="testimonial-name">Gierkauboba</h3>
-                    <p class="testimonial-desc">Youtuber 350+ subskrypcji</p>
+                    <p class="testimonial-desc">Youtuber 400+ subskrypcji</p>
                 </div>
 
                 <div class="testimonial-card">
@@ -998,7 +1056,7 @@
                 <span id="modalTitle" class="modal-title">Nazwa Produktu</span>
                 <span class="close-modal" onclick="closeModal()">&times;</span>
             </div>
-        
+         
             <div class="modal-body">
                 <img id="modalImg" src="" alt="Produkt" class="modal-img">
                 
@@ -1030,6 +1088,7 @@
 
     <script>
         // --- LOGIKA SKLEPU ---
+        
         const products = [
             { name: "Serwer Starter", id: "prod-starter", category: "discord" },
             { name: "Serwer Standard", id: "prod-standard", category: "discord" },
@@ -1093,7 +1152,8 @@
 
         function switchCategory(catId) {
             document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
-            document.getElementById(catId).classList.add('active');
+            const target = document.getElementById(catId);
+            if(target) target.classList.add('active');
             
             // Obsługa przycisków kategorii (tylko jeśli istnieją dla danej sekcji)
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
@@ -1106,7 +1166,7 @@
 
         // --- MODAL LOGIC ---
         const modal = document.getElementById('productModal');
-        
+
         function openModal(btnElement) {
             const card = btnElement.closest('.card');
             const title = card.querySelector('.card-header h3').innerText;
