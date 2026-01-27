@@ -1,45 +1,50 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="light">
+<html lang="pl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wytwórnia Serwerów - Sklep</title>
+    <title>Wytwórnia Serwerów</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- ZMIENNE I MOTYWY --- */
         :root {
-            /* Domyślny (JASNY) */
+            /* JASNY */
             --primary-color: #ff0054;
+            --primary-dark: #cc0044;
             --primary-glow: rgba(255, 0, 84, 0.4);
-            --bg-color: #ffffff;
+            --bg-color: #f4f6f8;
             --text-color: #1a1a1a;
-            --card-bg: #fcfcfc;
+            --card-bg: #ffffff;
             --card-border: #e0e0e0;
-            --nav-bg: rgba(255, 255, 255, 0.98);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a1a;
+            --footer-text: #e0e0e0;
             --modal-overlay: rgba(0,0,0,0.6);
-            --modal-bg: #ffffff;
-            --secondary-text: #444;
+            --secondary-text: #666;
             --minecraft-font: 'VT323', monospace;
+            --body-font: 'Poppins', sans-serif;
             --transition-speed: 0.3s;
         }
 
         [data-theme="dark"] {
             /* CIEMNY (NEON) */
             --primary-color: #ff0054;
-            --primary-glow: rgba(255, 0, 84, 0.8);
+            --primary-dark: #ff1a66;
+            --primary-glow: rgba(255, 0, 84, 0.6);
             --bg-color: #0f0f13;
             --text-color: #f0f0f0;
             --card-bg: #1a1a20;
             --card-border: #333;
             --nav-bg: rgba(15, 15, 19, 0.95);
+            --footer-bg: #050508;
+            --footer-text: #cccccc;
             --modal-overlay: rgba(0, 0, 0, 0.85);
-            --modal-bg: #1a1a20;
-            --secondary-text: #ccc;
+            --secondary-text: #aaa;
         }
 
         * {
@@ -47,20 +52,31 @@
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
-            transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--body-font);
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
             padding-top: 90px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        h1, h2, h3, .mc-font, .btn, .price, .logo-text, .nav-link-custom, .buy-btn {
+        h1, h2, h3, .mc-font, .price, .logo-text, .nav-link-custom, .buy-btn, .counter-number {
             font-family: var(--minecraft-font);
             letter-spacing: 1px;
+        }
+
+        /* --- ANIMACJE WEJŚCIA (SCROLL REVEAL) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- NAV I MENU --- */
@@ -69,12 +85,10 @@
             border-bottom: 2px solid var(--primary-color);
             height: 90px;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             z-index: 1000;
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
         }
@@ -91,7 +105,6 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            position: relative;
         }
 
         .logo a {
@@ -111,9 +124,8 @@
             font-size: 2rem;
             margin-left: 15px;
             font-weight: bold;
-            /* WYMUSZONY KOLOR PRIMARY (Różowo-Czerwony) ZAWSZE */
-            color: var(--primary-color) !important; 
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+            color: var(--primary-color) !important;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
         }
 
         .logo a:hover .logo-img { transform: scale(1.1) rotate(-5deg); }
@@ -121,15 +133,15 @@
         /* Wyszukiwarka */
         .search-box {
             position: relative;
-            width: 30%;
-            max-width: 400px;
+            width: 25%;
+            max-width: 300px;
         }
 
         .search-input {
             width: 100%;
             padding: 10px 15px;
             border: 2px solid var(--card-border);
-            border-radius: 4px;
+            border-radius: 50px;
             font-family: var(--minecraft-font);
             font-size: 1.3rem;
             background: var(--card-bg);
@@ -145,7 +157,7 @@
 
         .search-results {
             position: absolute;
-            top: 110%;
+            top: 120%;
             left: 0;
             width: 100%;
             background: var(--card-bg);
@@ -155,7 +167,13 @@
             display: none;
             z-index: 1001;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-radius: 4px;
+            border-radius: 10px;
+            animation: fadeInResults 0.3s ease;
+        }
+
+        @keyframes fadeInResults {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .search-item {
@@ -164,34 +182,19 @@
             border-bottom: 1px solid var(--card-border);
             font-family: var(--minecraft-font);
             font-size: 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-color);
+            display: flex; justify-content: space-between;
         }
+        .search-item:hover { background-color: var(--primary-color); color: white; }
 
-        .search-item:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* --- TOP LINKS & TOGGLES --- */
-        .nav-right-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .top-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+        /* Menu linki */
+        .nav-right-section { display: flex; align-items: center; gap: 20px; }
+        .top-links { display: flex; gap: 25px; align-items: center; }
 
         .menu-link {
             text-decoration: none;
             color: var(--text-color);
             font-weight: 500;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             text-transform: uppercase;
             transition: all 0.2s;
             font-family: var(--minecraft-font);
@@ -202,19 +205,15 @@
         .menu-link::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
+            width: 0; height: 2px;
+            bottom: -5px; left: 0;
             background-color: var(--primary-color);
             transition: width 0.3s;
             box-shadow: 0 0 8px var(--primary-color);
         }
-
         .menu-link:hover::after { width: 100%; }
         .menu-link:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-glow); }
 
-        /* Theme Switcher */
         .theme-switch {
             background: transparent;
             border: 2px solid var(--card-border);
@@ -223,62 +222,84 @@
             border-radius: 20px;
             cursor: pointer;
             font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            /* Ważne: Zawsze widoczny */
-            z-index: 1002;
+            transition: 0.3s;
         }
-        .theme-switch:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px var(--primary-glow);
-        }
+        .theme-switch:hover { border-color: var(--primary-color); box-shadow: 0 0 10px var(--primary-glow); }
+        .hamburger { display: none; background: none; border: none; color: var(--text-color); font-size: 2rem; cursor: pointer; }
 
-        /* Hamburger */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        /* --- NOWY HEADER (BANNER REKLAMOWY) --- */
+        /* --- HEADER & STATS --- */
         header {
             position: relative;
             width: 100%;
-            /* Minimalna wysokość, żeby banner był widoczny */
-            min-height: 250px; 
-            margin-bottom: 40px;
+            min-height: 350px;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             background: #111;
+            margin-bottom: 0;
         }
 
-        /* Rozmyte tło (wypełniacz boków) */
         .banner-bg-blur {
             position: absolute;
-            top: -10%; left: -10%;
-            width: 120%; height: 120%;
+            top: -10%; left: -10%; width: 120%; height: 120%;
             background-image: url('https://imgur.com/h3R72Rt.png');
-            background-position: center;
-            background-size: cover;
+            background-position: center; background-size: cover;
             filter: blur(20px) brightness(0.6);
             z-index: 1;
         }
 
-        /* Główny obraz bannera */
         .banner-img {
             position: relative;
             z-index: 2;
-            max-width: 1200px; /* Szerokość kontenera */
-            width: 100%;
-            height: auto;
+            max-width: 1000px; width: 100%; height: auto;
             object-fit: contain;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- SEKCJA LICZNIKÓW (STATS) --- */
+        .stats-section {
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--card-border);
+            padding: 40px 0;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+
+        .counter-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .stat-desc {
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         /* --- KATEGORIE --- */
@@ -293,7 +314,7 @@
         .cat-btn {
             background: var(--card-bg);
             border: 2px solid var(--card-border);
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 1.6rem;
             font-family: var(--minecraft-font);
             cursor: pointer;
@@ -303,35 +324,19 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-radius: 4px;
         }
-
-        .cat-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .cat-btn:hover::before { left: 100%; }
-
-        .cat-btn:hover { 
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 15px var(--primary-glow);
-        }
-
-        .cat-btn.active {
+        
+        .cat-btn:hover, .cat-btn.active { 
             background: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
-            box-shadow: 0 0 20px var(--primary-glow);
-            text-shadow: 2px 2px 0 #000;
+            box-shadow: 0 5px 20px var(--primary-glow);
+            transform: translateY(-3px);
         }
 
         /* --- GRID PRODUKTÓW --- */
-        .section-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .section-content { display: none; animation: fadeIn 0.6s ease; }
         .section-content.active { display: block; }
 
         @keyframes fadeIn {
@@ -339,17 +344,18 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
         .section-header h2 { 
-            font-size: 3rem; 
+            font-size: 3.5rem;
             color: var(--text-color); 
             margin-bottom: 10px;
-            text-shadow: 2px 2px 0 var(--bg-color);
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
         }
+        .section-header p { font-size: 1.1rem; color: var(--secondary-text); }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             padding-bottom: 40px;
         }
@@ -361,323 +367,496 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 8px;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 15px var(--primary-glow);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 20px var(--primary-glow);
         }
 
         .card-header {
             padding: 20px;
-            background: #111;
+            background: linear-gradient(45deg, #111, #222);
             color: white;
             text-align: center;
             border-bottom: 2px solid var(--primary-color);
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMjIyIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMzMzMiLz4KPC9zdmc+');
         }
+        .card-header h3 { font-size: 1.8rem; margin: 0; }
 
-        .card-body { padding: 25px; flex-grow: 1; text-align: center; }
+        .card-body { padding: 30px; flex-grow: 1; text-align: center; }
 
         .card-img-placeholder {
-            width: 80px; height: 80px; margin: 0 auto 20px auto;
+            width: 90px;
+            height: 90px; margin: 0 auto 20px auto;
             display: block; object-fit: contain;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+            transition: transform 0.3s;
         }
+        .card:hover .card-img-placeholder { transform: scale(1.1) rotate(5deg); }
 
         .price {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--primary-color);
-            text-align: center;
             margin-bottom: 25px;
             font-weight: bold;
-            text-shadow: 2px 2px 0px #000, 0 0 10px var(--primary-glow);
+            text-shadow: 0 0 15px var(--primary-glow);
         }
 
-        .features-list { list-style: none; text-align: left; }
+        .features-list { list-style: none; text-align: left; margin-bottom: 20px; }
         .features-list li {
-            margin-bottom: 10px;
-            padding-left: 30px;
+            margin-bottom: 12px;
+            padding-left: 35px;
             position: relative;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--secondary-text);
-            font-family: var(--minecraft-font);
+            font-weight: 500;
         }
         .features-list li::before {
-            content: '\f1b2'; /* Cube icon */
+            content: '\f00c';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            position: absolute;
-            left: 0;
+            position: absolute; left: 0;
             color: var(--primary-color);
-            font-size: 0.8rem;
-            top: 4px;
+            font-size: 1rem; top: 2px;
         }
 
-        .card-footer {
-            padding: 20px;
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-            background: rgba(0,0,0,0.02);
-        }
+        .card-footer { padding: 20px; border-top: 1px solid var(--card-border); background: rgba(0,0,0,0.02); }
 
         .buy-btn {
             background: var(--primary-color);
             color: white;
-            display: block;
-            width: 100%;
+            display: block; width: 100%;
             padding: 15px;
             text-decoration: none;
             font-size: 1.5rem;
             text-transform: uppercase;
-            box-shadow: 4px 4px 0px #88002d;
-            transition: 0.1s;
-            cursor: pointer;
-            border: none;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transition: 0.3s;
+            cursor: pointer; border: none; border-radius: 4px;
         }
         .buy-btn:hover {
-            background: #ff1a66;
-            box-shadow: 0 0 20px var(--primary-glow), 4px 4px 0px #88002d;
-        }
-        .buy-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #88002d;
+            background: var(--primary-dark);
+            box-shadow: 0 6px 25px var(--primary-glow);
+            transform: translateY(-2px);
         }
 
         .badge {
             position: absolute;
             top: 15px; right: -30px;
-            background: #ff4757;
-            color: white;
-            padding: 5px 40px;
-            font-size: 1rem;
+            background: #ff4757; color: white;
+            padding: 5px 40px; font-size: 1rem;
             font-family: var(--minecraft-font);
-            transform: rotate(45deg);
-            z-index: 2;
+            transform: rotate(45deg); z-index: 2;
             box-shadow: 0 5px 10px rgba(0,0,0,0.2);
             border: 2px solid white;
         }
 
-        /* --- INFO CARDS --- */
+        /* --- INFO CARDS (JAK ZAMAWIAĆ) --- */
         .info-card-container {
-            max-width: 900px;
-            margin: 0 auto; 
-            padding-bottom: 40px;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
+            padding-bottom: 40px;
         }
 
         .info-card {
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            padding: 25px;
-            display: flex;
-            align-items: flex-start;
-            gap: 25px;
-            transition: transform 0.2s;
-            border-radius: 4px;
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 8px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
         .info-card:hover {
             border-color: var(--primary-color);
-            transform: translateX(10px);
-            box-shadow: -5px 5px 0 var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary-color);
+            opacity: 0; transition: 0.3s;
+        }
+        .info-card:hover::before { opacity: 1; }
 
         .info-icon {
             background: var(--primary-color);
             color: white;
-            font-size: 2rem;
-            width: 60px; height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            box-shadow: 4px 4px 0 #000;
+            font-size: 1.5rem; font-weight: bold; font-family: var(--minecraft-font);
+            width: 50px; height: 50px;
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px var(--primary-glow);
         }
 
-        .info-content h4 { 
-            margin-bottom: 8px; font-size: 1.8rem; 
-            font-family: var(--minecraft-font);
+        .info-content h4 { font-size: 1.5rem; font-family: var(--minecraft-font); margin-bottom: 10px; }
+        .info-content p { color: var(--secondary-text); font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- FAQ SECTION --- */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            width: 100%;
+            text-align: left;
+            background: none; border: none;
             color: var(--text-color);
+            font-size: 1.2rem;
+            font-family: var(--body-font);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between; align-items: center;
         }
         
-        .info-content p, .info-content li { color: var(--secondary-text); }
+        .faq-question:hover { color: var(--primary-color); }
+        .faq-question i { transition: 0.3s; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--primary-color); }
 
-        /* --- MODAL (POPUP) --- */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background: rgba(0,0,0,0.02);
+            color: var(--secondary-text);
+            padding: 0 20px;
+        }
+        
+        .faq-item.active .faq-answer { max-height: 200px; padding: 20px; border-top: 1px solid var(--card-border); }
+
+        /* --- ZAUFALI NAM (ULEPSZONE) --- */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            text-align: center;
+            position: relative;
+        }
+        .review-card:hover { border-color: var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .review-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            margin: 0 auto 15px;
+            padding: 3px;
+        }
+        .review-quote { font-style: italic; color: var(--secondary-text); margin-bottom: 20px; }
+        .review-author { font-weight: bold; font-family: var(--minecraft-font); font-size: 1.4rem; color: var(--text-color); }
+        .review-role { font-size: 0.85rem; color: var(--primary-color); text-transform: uppercase; font-weight: bold; }
+
+        /* --- SEKCJA PARTNERZY (ANIMOWANY SLIDER) --- */
+        .partners-section {
+            padding: 40px 0;
+            margin-bottom: 50px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slider-track {
+            display: flex;
+            width: calc(150px * 10); /* Szerokość slajdu x ilość (duplikaty wliczone) */
+            animation: scrollPartners 15s linear infinite;
+        }
+        
+        .slide {
+            width: 150px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide img {
+            width: 100%;
+            max-width: 80px;
+            height: auto;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .slide img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        @keyframes scrollPartners {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-150px * 5)); } /* Przesuwamy o połowę tracku */
+        }
+
+        /* --- WAVE & FOOTER --- */
+        .wave-container {
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            line-height: 0;
+            background: var(--bg-color);
+            margin-bottom: -1px;
+        }
+        .wave-container svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+        .wave-fill { fill: var(--footer-bg); }
+
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--minecraft-font);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute; bottom: -5px; left: 0;
+            width: 40px; height: 3px;
+            background: var(--primary-color);
+        }
+
+        .footer-links li { list-style: none; margin-bottom: 12px; }
+        .footer-links a {
+            color: #888;
+            text-decoration: none; transition: 0.2s; display: flex; align-items: center; gap: 10px;
+        }
+        .footer-links a:hover { color: var(--primary-color); padding-left: 5px; }
+
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .social-btn:hover { background: var(--primary-color); transform: translateY(-3px); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- MODAL --- */
         .modal {
             display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
+            position: fixed; z-index: 2000;
+            left: 0; top: 0; width: 100%; height: 100%;
             overflow: auto;
             background-color: var(--modal-overlay);
             backdrop-filter: blur(5px);
             align-items: center;
             justify-content: center;
             padding: 10px;
+            opacity: 0; /* Default invisible for animation */
+            transition: opacity 0.3s ease;
+        }
+        .modal.active {
+            display: flex;
+            opacity: 1;
         }
         
-        .modal.active { display: flex; animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-
-        @keyframes modalPop {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
+        /* Animacja otwierania i zamykania zawartości */
         .modal-content {
             background-color: var(--modal-bg);
             border: 2px solid var(--primary-color);
             box-shadow: 0 0 30px var(--primary-glow);
-            width: 100%;
-            max-width: 650px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            max-height: 90vh;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .modal-header {
-            background: #111;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        .modal-title { 
-            font-family: var(--minecraft-font); 
-            font-size: 2rem; 
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--primary-glow);
+            width: 100%; max-width: 650px;
+            position: relative; display: flex; flex-direction: column;
+            max-height: 90vh; border-radius: 8px; overflow: hidden;
+            background-image: url('https://imgur.com/h3R72Rt.png');
+            background-size: cover;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        .close-modal { color: #fff; font-size: 2rem; cursor: pointer; transition: 0.2s; }
-        .close-modal:hover { color: var(--primary-color); transform: rotate(90deg); }
-
-        .modal-body { padding: 30px; overflow-y: auto; color: var(--text-color); }
-
-        .modal-img {
-            width: 100%; max-height: 250px;
-            object-fit: contain;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal.closing {
+            opacity: 0;
+        }
+        .modal.closing .modal-content {
+            transform: scale(0.8);
         }
 
-        .modal-price-row {
+        .modal-header { background: #111; padding: 20px;
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 25px; padding-bottom: 15px;
-            border-bottom: 1px dashed var(--secondary-text);
+            border-bottom: 2px solid var(--primary-color);
+            z-index: 2;
         }
-
-        .modal-price {
-            font-family: var(--minecraft-font);
-            font-size: 2.5rem;
+        .modal-title { font-family: var(--minecraft-font); font-size: 2rem;
             color: var(--primary-color);
-            text-shadow: 0 0 10px var(--primary-glow);
+        text-shadow: 0 0 10px var(--primary-glow); }
+        .close-modal { color: #fff;
+            font-size: 2rem;
+        cursor: pointer; transition: 0.2s; }
+        .close-modal:hover { color: var(--primary-color); transform: rotate(90deg); }
+        .modal-body { 
+            padding: 30px;
+            overflow-y: auto; 
+            color: #fff; 
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2;
         }
+        
+        .modal-body .stat-desc, .modal-body li { color: #ddd !important; }
 
-        .modal-tutorial-mini {
-            background: rgba(255, 0, 84, 0.1);
-            padding: 20px;
-            border-left: 4px solid var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1rem;
-            border-radius: 0 4px 4px 0;
+        /* Floating Discord Button */
+        .floating-discord {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: #5865F2; color: white;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.5);
+            z-index: 2000;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
         }
+        .floating-discord:hover { transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 30px rgba(88, 101, 242, 0.8); }
 
-        /* --- POWIADOMIENIA (TOAST) --- */
-        .notification-container {
+        /* --- POPUP REKLAMOWY --- */
+        .ad-popup {
             position: fixed;
             bottom: 20px;
-            right: 20px;
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toast {
-            background: rgba(17, 17, 17, 0.95);
+            left: 20px;
+            width: 300px;
+            background: var(--card-bg);
             border: 2px solid var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 4px;
-            box-shadow: 0 0 20px var(--primary-glow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            min-width: 300px;
-            animation: slideIn 0.5s ease-out;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            z-index: 3000;
+            display: none;
+            /* Animation applied in JS/Class */
+        }
+        
+        .ad-popup.show {
+            display: block;
+            animation: slideInLeft 0.5s ease-out forwards;
         }
 
-        .toast i { font-size: 1.5rem; color: var(--primary-color); }
-        .toast-content { display: flex; flex-direction: column; }
-        .toast-title { font-family: var(--minecraft-font); font-size: 1.3rem; color: var(--primary-color); }
-        .toast-msg { font-size: 0.9rem; color: #eee; }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
+        .ad-popup.closing {
+            animation: slideOutLeft 0.5s ease-in forwards;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* --- MEDIA QUERIES (MOBILE) --- */
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-120%); opacity: 0; }
+        }
+
+        .ad-header {
+            display: flex;
+            justify-content: space-between; align-items: center; margin-bottom: 10px;
+        }
+        .ad-title { color: var(--primary-color); font-family: var(--minecraft-font);
+            font-size: 1.5rem; }
+        .ad-close { cursor: pointer; color: var(--text-color); font-size: 1.2rem; }
+        .ad-content img { width: 100%; border-radius: 5px; margin-bottom: 10px; }
+        .ad-btn {
+            background: var(--primary-color);
+            color: white; border: none; padding: 8px; width: 100%;
+            cursor: pointer; border-radius: 4px; font-weight: bold; margin-top: 5px;
+            transition: 0.3s;
+        }
+        .ad-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
+
+        /* Mobile */
         @media (max-width: 900px) {
             nav { height: 70px; }
             .logo-text { font-size: 1.5rem; }
             .logo-img { height: 35px; }
-
-            .hamburger { display: block; margin-left: 10px; order: 1; }
-            
+            .hamburger { display: block; order: 1; margin-left: 15px;}
             .search-box { display: none; }
-            
-            /* Zmiana kolejności, aby theme-switch był max z prawej */
-            .nav-right-section { gap: 10px; }
             .theme-switch { order: 2; margin-left: 5px; }
-
             .top-links {
                 position: absolute;
-                top: 70px;
-                right: 0;
+                top: 70px; right: 0;
                 background: var(--card-bg);
                 border-bottom: 4px solid var(--primary-color);
-                width: 100%;
-                flex-direction: column;
-                padding: 20px 0;
-                display: none; 
+                width: 100%; flex-direction: column; padding: 20px 0;
+                display: flex; /* Changed from none to handle animation */
                 box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-                animation: slideDown 0.3s forwards;
+                transform: translateY(-20px);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.4s ease;
             }
-
-            .top-links.active { display: flex; }
-
-            .menu-link {
-                font-size: 1.8rem;
-                padding: 15px;
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
+            .top-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
             }
-            
-            @keyframes slideDown {
-                from { opacity: 0; transform: translateY(-10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            /* Poprawki dla bannera na mobile */
-            header { min-height: 150px; }
-            .cat-btn { padding: 10px 15px; font-size: 1.2rem; min-width: auto; flex: 1; }
+            .section-header h2 { font-size: 2.5rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -698,12 +877,11 @@
             </div>
 
             <div class="nav-right-section">
-                
                 <div class="top-links" id="topLinks">
-                    <a class="menu-link" onclick="switchCategory('collab'); toggleMobileMenu()">Współpraca</a>
-                    <a class="menu-link" onclick="switchCategory('payments'); toggleMobileMenu()">Płatności</a>
-                    <a class="menu-link" onclick="switchCategory('rules'); toggleMobileMenu()">Regulamin</a>
-                    <a class="menu-link" onclick="switchCategory('howto'); toggleMobileMenu()">Jak zamawiać?</a>
+                    <a class="menu-link" onclick="scrollToSection('collab')">Współpraca</a>
+                    <a class="menu-link" onclick="scrollToSection('howto')">Jak kupić?</a>
+                    <a class="menu-link" onclick="scrollToSection('payments-section')">Wymiana</a>
+                    <a class="menu-link" onclick="scrollToSection('faq-section')">FAQ</a>
                 </div>
 
                 <button class="hamburger" onclick="toggleMobileMenu()">
@@ -711,9 +889,8 @@
                 </button>
 
                 <button class="theme-switch" onclick="toggleTheme()" title="Przełącz tryb">
-                    <i class="fas fa-moon" id="themeIcon"></i>
+                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
-
             </div>
         </div>
     </nav>
@@ -723,20 +900,42 @@
         <img src="https://imgur.com/KfASXkA.png" alt="Wytwórnia Serwerów Banner" class="banner-img">
     </header>
 
+    <section class="stats-section">
+        <div class="container">
+             <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <i class="fas fa-users"></i>
+                    <span class="counter-number" data-target="33">0</span>
+                    <span class="stat-desc">Zadowolonych Klientów</span>
+                </div>
+                <div class="stat-item reveal">
+                    <i class="fas fa-server"></i>
+                    <span class="counter-number" data-target="16">0</span>
+                    <span class="stat-desc">Stworzonych Serwerów</span>
+                </div>
+                <div class="stat-item reveal">
+                    <i class="fas fa-image"></i>
+                    <span class="counter-number" data-target="25">0</span>
+                    <span class="stat-desc">Stworzonych Miniaturek</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <main class="container">
 
-        <div class="category-tabs">
-            <button class="cat-btn active" onclick="switchCategory('discord')"><i class="fab fa-discord"></i> Serwery DC</button>
+        <div class="category-tabs reveal">
+            <button class="cat-btn active" onclick="switchCategory('discord')"><i class="fab fa-discord"></i> Serwery Dicord</button>
             <button class="cat-btn" onclick="switchCategory('thumbnails')"><i class="fas fa-image"></i> Miniaturki</button>
-            <button class="cat-btn" onclick="switchCategory('scripts')"><i class="fas fa-scroll"></i> Skrypty MC</button>
+            <button class="cat-btn" onclick="switchCategory('scripts')"><i class="fas fa-scroll"></i> Skrypty Minecraft</button>
         </div>
 
         <section id="discord" class="section-content active">
             <div class="section-header">
                 <h2>Gotowe Paczki Discord</h2>
-                <p>Wybierz pakiet idealny dla siebie</p>
+                <p>Profesjonalnie skonfigurowane serwery gotowe do działania</p>
             </div>
-
             <div class="grid">
                 <div class="card" id="prod-starter">
                     <div class="card-header"><h3>Starter</h3></div>
@@ -748,50 +947,30 @@
                             <li>Weryfikacja, role, uprawnienia</li>
                             <li>Podstawowe zabezpieczenia</li>
                             <li>Uproszczony panel ticketów</li>
-                            <li>System powitań</li>
+                            <li>Kanały powitań i pożegnań</li>
+                            <li>Role za reakcję (proste)</li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
-
                 <div class="card" id="prod-standard">
-                    <div class="badge">POPULARNE</div>
+                    <div class="badge">HIT</div>
                     <div class="card-header"><h3>Standard</h3></div>
                     <div class="card-body">
                         <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
                         <div class="price">1 MLN</div>
                         <ul class="features-list">
                             <li>Wszystko ze Startera</li>
-                            <li>Rozbudowane kanały</li>
+                            <li>Rozbudowane kanały 4fun</li>
                             <li>Kanał changelog</li>
-                            <li>Więcej kanałów 4fun</li>
                             <li>Lepsze zabezpieczenia</li>
+                            <li>Automoderacja (podstawowa)</li>
+                            <li>System poziomów (Leveling)</li>
+                            <li>Statystyki serwera (Voice)</li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
-
-                <div class="card" id="prod-standardplus">
-                    <div class="card-header"><h3>Standard+</h3></div>
-                    <div class="card-body">
-                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
-                        <div class="price">3.5 MLN</div>
-                        <ul class="features-list">
-                            <li>System partnerstw</li>
-                            <li>Bump + konfiguracja</li>
-                            <li>Kanał głosowy (create)</li>
-                            <li>Zaawansowane role</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-
                 <div class="card" id="prod-premium">
                     <div class="card-header"><h3>Premium</h3></div>
                     <div class="card-body">
@@ -802,13 +981,13 @@
                             <li>System "Wprowadzenie"</li>
                             <li><strong>Grafiki od grafika</strong></li>
                             <li>Pełna personalizacja</li>
+                            <li>Logi serwerowe (Audit)</li>
+                            <li>Anty-raid protection</li>
+                            <li>Ekonomia serwerowa</li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
-
                 <div class="card" id="prod-deluxe">
                     <div class="badge" style="background:gold; color:black;">VIP</div>
                     <div class="card-header"><h3>Deluxe</h3></div>
@@ -819,467 +998,530 @@
                             <li>Wszystko z Premium</li>
                             <li>Zaawansowana weryfikacja</li>
                             <li>Bump + Bump Dzik</li>
-                            <li>Zaawansowane grafiki</li>
                             <li><strong>Autorski BOT!</strong></li>
+                            <li>Backup serwera</li>
+                            <li>Priorytetowe wsparcie 24/7</li>
+                            <li>Indywidualne ikony ról</li>
+                            <li>Konfiguracja botów muzycznych</li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
             </div>
         </section>
 
         <section id="thumbnails" class="section-content">
             <div class="section-header">
-                <h2>Miniaturki</h2>
-                <p>Przyciągnij widzów profesjonalnym wyglądem</p>
+                <h2>Miniaturki YouTube</h2>
+                <p>Zwiększ klikalność swoich filmów</p>
             </div>
             <div class="grid">
-                
                 <div class="card" id="prod-mini-prosta">
                     <div class="card-header"><h3>Miniaturka Prosta</h3></div>
                     <div class="card-body">
-                        <img src="https://imgur.com/Odc9Qnz.png" alt="Prosta" class="img-preview product-img-source" style="width:100%; border-radius:4px;">
-                        <div class="price" style="margin-top:10px;">500 K</div>
+                        <img src="https://imgur.com/Odc9Qnz.png" class="img-preview product-img-source" style="width:100%; border-radius:4px; margin-bottom:15px;">
+                        <div class="price">500 K</div>
                         <p>Czysty design, czytelne napisy. Idealna na start.</p>
+                        <ul class="features-list" style="margin-top:15px;">
+                             <li>Rozdzielczość 1920x1080</li>
+                             <li>Do 2 poprawek</li>
+                             <li>Szybki czas realizacji</li>
+                        </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
-
                 <div class="card" id="prod-mini-prof">
                     <div class="card-header"><h3>Miniaturka PRO</h3></div>
                     <div class="card-body">
-                        <img src="https://imgur.com/RV41Sh2.png" alt="Profesjonalna" class="img-preview product-img-source" style="width:100%; border-radius:4px;">
-                        <div class="price" style="margin-top:10px;">1,3 MLN</div>
-                        <p>Zaawansowane cieniowanie, efekty świetlne, renderowanie 3D.</p>
+                        <img src="https://imgur.com/RV41Sh2.png" class="img-preview product-img-source" style="width:100%; border-radius:4px; margin-bottom:15px;">
+                        <div class="price">1,3 MLN</div>
+                        <p>Zaawansowane cieniowanie, efekty świetlne, renderowanie 3D postaci.</p>
+                        <ul class="features-list" style="margin-top:15px;">
+                             <li>Render 3D Twojego skina</li>
+                             <li>Nielimitowane poprawki</li>
+                             <li>Plik PSD w zestawie</li>
+                             <li>Najwyższa jakość tekstur</li>
+                             <li>Clickbaitowe efekty</li>
+                        </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
-
             </div>
         </section>
 
         <section id="scripts" class="section-content">
             <div class="section-header">
-                <h2>Skrypty Skript (.sk)</h2>
-                <p>Automatyzacja i unikalne funkcje na Twój serwer MC</p>
+                <h2>Skrypty Minecraft (.sk)</h2>
+                <p>Automatyzacja i unikalne mechaniki</p>
             </div>
             <div class="grid">
-                
                 <div class="card" id="prod-skrypt-login">
-                    <div class="card-header"><h3>Logowanie v1.1</h3></div>
+                    <div class="card-header"><h3>System Logowania</h3></div>
                     <div class="card-body">
-                        <img src="https://imgur.com/cDZhMvI.png" class="card-img-placeholder product-img-source">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2303/2303943.png" class="card-img-placeholder product-img-source">
                         <div class="price">2 MLN</div>
                         <ul class="features-list">
-                            <li>/login, /register, /zmien_haslo</li>
+                            <li>Komendy /login, /register</li>
                             <li>Ochrona przed botami</li>
-                            <li>Konfigurowalne wiadomości</li>
-                            <li>Auto-kick</li>
+                            <li>Polskie wiadomości</li>
+                            <li>Szyfrowanie haseł</li>
+                            <li>Sesja logowania</li>
                         </ul>
-                        <p style="font-size:0.8rem; margin-top:10px; opacity:0.7;">Wymagania: Plugin Skript</p>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
-
                 <div class="card" id="prod-skrypt-custom">
                     <div class="card-header"><h3>Skrypt na Zamówienie</h3></div>
                     <div class="card-body">
-                        <img src="https://imgur.com/cDZhMvI.png" class="card-img-placeholder product-img-source">
+                        <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="card-img-placeholder product-img-source">
                         <div class="price">6.5 MLN</div>
                         <ul class="features-list">
                             <li>Realizacja wg Twojego opisu</li>
                             <li>Czas: 2-5 dni</li>
-                            <li>Pełne wsparcie</li>
+                            <li>Pełne wsparcie techniczne</li>
+                            <li>Optymalizacja kodu</li>
+                            <li>Plik konfiguracyjny (YAML)</li>
+                            <li>Testy obciążeniowe</li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <button class="buy-btn" onclick="openModal(this)">ZOBACZ <i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="collab" class="section-content">
-            <div class="section-header">
-                <h2>Program Współpracy</h2>
-                <p>Zostań Twórcą i korzystaj ze specjalnych przywilejów</p>
-            </div>
-
-            <div class="info-card-container">
-                <div class="info-card">
-                    <div class="info-icon" style="background: var(--secondary-color);">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="info-content">
-                        <h4>Ranga "Twórca"</h4>
-                        <p>Poszukujemy ambitnych osób, które chcą rozwijać swoje kanały razem z Wytwórnią Serwerów. Jeśli tworzysz content na YouTube, mamy dla Ciebie ofertę specjalną.</p>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="info-icon" style="background: gold; color: #333;"><i class="fas fa-gift"></i></div>
-                    <div class="info-content">
-                        <h4>Twoje Korzyści</h4>
-                        <ul class="features-list" style="margin-top: 10px;">
-                            <li><strong>-20%</strong> zniżki na wszystkie Miniaturki</li>
-                            <li><strong>-20%</strong> zniżki na wszystkie Skrypty MC</li>
-                            <li><strong>-5%</strong> zniżki na wszystkie Serwery Discord</li>
-                            <li>Wyróżniająca ranga na naszym Discordzie</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="info-icon" style="background:#cc0044;"><i class="fab fa-youtube"></i></div>
-                    <div class="info-content">
-                        <h4>Wymagania Minimalne</h4>
-                        <ul class="features-list" style="margin-top: 10px;">
-                            <li>Aktywna działalność na <strong>YouTube</strong></li>
-                            <li>Minimum <strong>200 subskrypcji</strong></li>
-                            <li>Regularne transmisje Live (min. raz na 2 tygodnie)</li>
-                            <li>Wyświetlanie naszego GIFa reklamowego podczas Live</li>
-                            <li>Umieszczenie linku do Wytwórni w opisie transmisji</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="info-icon" style="background:#28a745;"><i class="fas fa-check-double"></i></div>
-                    <div class="info-content">
-                        <h4>Jak odebrać rangę?</h4>
-                        <p>Jeśli spełniasz wszystkie wymagania i przeprowadziłeś już co najmniej jeden Live z naszą reklamą:</p>
-                        <ol style="margin: 10px 0 10px 20px; font-family: sans-serif; color:var(--secondary-text);">
-                            <li>Wejdź na nasz Discord.</li>
-                            <li>Stwórz <strong>Ticket</strong>.</li>
-                            <li>Wyślij link do swojego kanału oraz dowód (screen/link) z transmisji.</li>
-                        </ol>
-                        <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" style="text-align:center; margin-top:15px; text-decoration:none;">ZGŁOŚ SIĘ PO RANGĘ</a>
-                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
             </div>
         </section>
+        
+        <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 60px 0;">
 
-        <section id="howto" class="section-content">
+        <section id="howto" class="reveal" style="margin-bottom: 80px;">
             <div class="section-header">
-                <h2>Jak zamawiać?</h2>
-                <p>Postępuj zgodnie z instrukcją, aby zrealizować zamówienie</p>
+                <h2>Jak złożyć zamówienie?</h2>
+                <p>Prosty proces w 4 krokach</p>
             </div>
-            
             <div class="info-card-container">
                 <div class="info-card">
                     <div class="info-icon">1</div>
                     <div class="info-content">
-                        <h4>Dołącz na Discorda</h4>
-                        <p>Wejdź na nasz serwer Discord: <a href="https://dc.gg/wytworniaserwerow" style="color:var(--primary-color); font-weight:bold;">dc.gg/wytworniaserwerow</a></p>
+                        <h4>Discord</h4>
+                        <p>Dołącz na nasz serwer Discord. To tam odbywa się cała komunikacja.</p>
                     </div>
                 </div>
-
                 <div class="info-card">
                     <div class="info-icon">2</div>
                     <div class="info-content">
-                        <h4>Znajdź katalog</h4>
-                        <p>Wejdź na dowolny kanał z katalogami produktów, np. <strong>katalog-serwerów</strong>.</p>
+                        <h4>Wybór</h4>
+                        <p>Przejrzyj katalogi na kanałach tekstowych i wybierz interesujący Cię pakiet.</p>
                     </div>
                 </div>
-
                 <div class="info-card">
                     <div class="info-icon">3</div>
                     <div class="info-content">
-                        <h4>Znajdź kanał zamówień</h4>
-                        <p>Gdy już wybierzesz pakiet, wejdź do kanału <strong>zamówienia</strong> w tej samej kategorii.</p>
+                        <h4>Ticket</h4>
+                        <p>Utwórz ticket (zgłoszenie) w odpowiednim dziale zamówień.</p>
                     </div>
                 </div>
-
                 <div class="info-card">
                     <div class="info-icon">4</div>
                     <div class="info-content">
-                        <h4>Stwórz Ticket</h4>
-                        <p>Kliknij przycisk tworzenia ticketa i poczekaj na odpowiedź od administracji. Opisz w nim, który produkt wybrałeś.</p>
+                        <h4>Realizacja</h4>
+                        <p>Opłać zamówienie i czekaj na realizację przez naszych techników.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="payments" class="section-content">
+        <section id="collab" class="reveal" style="background: rgba(0,0,0,0.02); padding: 50px; border-radius: 10px; margin-bottom: 80px;">
             <div class="section-header">
-                <h2>Płatności</h2>
-                <p>Wymiana walut z innych gier i trybów</p>
+                <h2>Program Partnerski</h2>
+                <p>Jesteś YouTuberem? Mamy dla Ciebie ofertę!</p>
             </div>
-            <div class="container info-card-container">
-                
-                <div style="background:rgba(255, 193, 7, 0.1); border:2px solid #ffc107; color:var(--text-color); padding:15px; border-radius:4px; text-align:center;">
-                    <i class="fas fa-exclamation-triangle"></i> Nie grasz w Minecrafta na serwerze anarchia.gg na trybie oneblock? Nie ma sprawy! Poniżej znajduje się cennik dla innych gier.
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center;">
+                <div style="max-width: 500px;">
+                    <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 20px;">Ranga Twórca</h3>
+                    <ul class="features-list">
+                        <li><strong>-20%</strong> zniżki na wszystkie Miniaturki</li>
+                        <li><strong>-20%</strong> zniżki na Skrypty MC</li>
+                        <li>Specjalna ranga na Discordzie</li>
+                    </ul>
+                    <a href="https://dc.gg/wytworniaserwerow" class="buy-btn" style="text-align: center; margin-top: 20px;">ZGŁOŚ SIĘ</a>
                 </div>
+                <div style="max-width: 500px;">
+                    <h4 style="margin-bottom: 15px;">Wymagania:</h4>
+                    <ul class="features-list">
+                        <li>Minimum <strong>200 subskrypcji</strong></li>
+                        <li>Regularne filmy/live (min. raz na 2 tyg)</li>
+                        <li>Reklama Wytwórni w opisie live i na ekranie</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-                <div class="info-card">
-                    <div class="info-icon" style="background:#000;"><i class="fas fa-shapes"></i></div>
-                    <div class="info-content">
-                        <h4>ROBLOX - Robux</h4>
-                        <span class="conversion-rate" style="color:var(--primary-color); font-weight:bold; display:block; margin:5px 0;">1 MLN (OneBlock) = 70 Robux</span>
-                        <p>Możesz zapłacić walutą Robux. Przelicznik jest stały.</p>
+        <section id="payments-section" class="reveal" style="margin-bottom: 80px;">
+            <div class="section-header">
+                <h2>Wymiana Walut</h2>
+                <p>Płać walutą z innych trybów i gier</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header"><h3>ROBLOX</h3></div>
+                    <div class="card-body">
+                        <div class="price" style="font-size:2rem;">70 RBX = 1 MLN</div>
+                        <p>Możliwość płatności w Robuxach. Stały przelicznik.</p>
                     </div>
                 </div>
-
-                <div class="info-card">
-                    <div class="info-icon" style="background:#8b0000;"><i class="fas fa-heart"></i></div>
-                    <div class="info-content">
-                        <h4>Anarchia.gg - Lifesteal</h4>
-                        <span class="conversion-rate" style="color:var(--primary-color); font-weight:bold; display:block; margin:5px 0;">1 MLN (OneBlock) = 1k $ (Lifesteal)</span>
-                        <p>Płatność walutą z trybu Lifesteal na serwerze Anarchia.gg.</p>
+                <div class="card">
+                    <div class="card-header"><h3>Lifesteal</h3></div>
+                    <div class="card-body">
+                        <div class="price" style="font-size:2rem;">1k $ = 1 MLN</div>
+                        <p>Waluta z trybu Lifesteal na Anarchia.gg</p>
                     </div>
                 </div>
-
-                <div class="info-card">
-                    <div class="info-icon" style="background:#483D8B;"><i class="fas fa-cube"></i></div>
-                    <div class="info-content">
-                        <h4>Anarchia.gg - BoxPvP</h4>
-                        <span class="conversion-rate" style="color:var(--primary-color); font-weight:bold; display:block; margin:5px 0;">1 MLN (OneBlock) = 120k $ (BoxPvP)</span>
-                        <p>Płatność walutą z trybu BoxPvP na serwerze Anarchia.gg.</p>
+                <div class="card">
+                    <div class="card-header"><h3>BoxPvP</h3></div>
+                    <div class="card-body">
+                        <div class="price" style="font-size:2rem;">120k $ = 1 MLN</div>
+                        <p>Waluta z trybu BoxPvP na Anarchia.gg</p>
                     </div>
                 </div>
-
-                <div class="info-card">
-                    <div class="info-icon" style="background:#28a745;"><i class="fas fa-shopping-cart"></i></div>
-                    <div class="info-content">
-                        <h4>Kupno przedmiotu (ItemShop)</h4>
-                        <span class="conversion-rate" style="color:var(--primary-color); font-weight:bold; display:block; margin:5px 0;">1 MLN (OneBlock) = 2 PLN w sklepie</span>
+                <div class="card">
+                    <div class="card-header"><h3>Kupno przedmiotu (ItemShop)</h3></div>
+                    <div class="card-body">
+                        <div class="price" style="font-size:2rem;">2 PLN = 1 MLN</div>
                         <p>Kupujesz przedmiot (np. Klucze) na nick administratora/wykonawcy.</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <section id="rules" class="section-content">
+        <section id="faq-section" class="reveal" style="margin-bottom: 80px;">
             <div class="section-header">
-                <h2>Regulamin Zamówień</h2>
-                <p>Zasady obowiązujące podczas zakupów</p>
+                <h2>Częste Pytania (FAQ)</h2>
+                <p>Wszystko, co musisz wiedzieć</p>
             </div>
-            <div style="max-width:800px; margin:0 auto; background:var(--card-bg); padding:30px; border:2px solid var(--card-border);">
-                <ol style="padding-left:20px; color:var(--secondary-text); line-height:1.6;">
-                    <li><strong>Składanie zamówienia:</strong> Zamówienia przyjmujemy wyłącznie poprzez system ticketów na naszym serwerze Discord.</li>
-                    <li><strong>Płatność:</strong> Płatność pobierana jest z góry lub w transzach.</li>
-                    <li><strong>Czas realizacji:</strong> Standardowy czas realizacji wynosi od 2 do 5 dni roboczych.</li>
-                    <li><strong>Zwroty:</strong> Po przekazaniu produktu zwroty nie są przyjmowane.</li>
-                    <li><strong>Kultura:</strong> W ticketach obowiązuje pełna kultura.</li>
-                </ol>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">Ile czasu trwa realizacja? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Standardowy czas realizacji to od 30 minut do 7 dni, w zależności od skomplikowania zamówienia i ilości aktualnych zleceń.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Czy mogę zapłacić PSC? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Niestety nie, nie przyjmujemy płatności PaySafeCard, jednak można zapłacić kupując coś w itemshopie serwera (więcej info w zakładce "płatności")</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Czy otrzymam pomoc po zakupie? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Oczywiście! Każdy klient otrzymuje gwarancję rozruchową oraz wsparcie techniczne w razie problemów z konfiguracją zakupionego produktu.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <div style="margin-top:60px; padding:40px 0; border-top:2px solid var(--card-border); background: rgba(0,0,0,0.02);">
+        <section class="reveal" style="margin-bottom: 60px;">
             <div class="section-header">
-                <h2>Zaufali nam</h2>
+                <h2>Zaufali Nam</h2>
+                <p>Opinie zadowolonych twórców</p>
             </div>
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                
-                <div class="card" style="padding:20px; text-align:center;">
-                    <i class="fas fa-quote-left" style="font-size:2rem; color:var(--card-border); margin-bottom:10px;"></i>
-                    <img src="https://imgur.com/n571BdY.png" alt="Avatar" style="width:70px; height:70px; border-radius:50%; border:3px solid var(--primary-color); margin:0 auto 10px;">
-                    <h3 class="mc-font" style="font-size:1.5rem; color:var(--text-color);">Gierkauboba</h3>
-                    <p style="color:var(--secondary-text);">Youtuber 400+ subskrypcji</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <img src="https://imgur.com/n571BdY.png" alt="User" class="review-avatar">
+                    <div class="review-author">Gierkauboba</div>
+                    <div class="review-role">YouTuber (500+ sub)</div>
                 </div>
-
-                <div class="card" style="padding:20px; text-align:center;">
-                    <i class="fas fa-quote-left" style="font-size:2rem; color:var(--card-border); margin-bottom:10px;"></i>
-                    <img src="https://imgur.com/Q2CmKDG.png" alt="Avatar" style="width:70px; height:70px; border-radius:50%; border:3px solid var(--primary-color); margin:0 auto 10px;">
-                    <h3 class="mc-font" style="font-size:1.5rem; color:var(--text-color);">Soniczek929</h3>
-                    <p style="color:var(--secondary-text);">Youtuber 350+ subskrypcji</p>
+                <div class="review-card">
+                    <img src="https://imgur.com/Q2CmKDG.png" alt="User" class="review-avatar">
+                    <div class="review-author">Soniczek929</div>
+                    <div class="review-role">YouTuber (350+ sub)</div>
                 </div>
-
+                <div class="review-card">
+                    <img src="https://imgur.com/41ndPAT.png" alt="User" class="review-avatar">
+                    <div class="review-author">5zymix_</div>
+                    <div class="review-role">YouTuber (350+ sub)</div>
+                </div>
+                <div class="review-card">
+                     <img src="https://imgur.com/Dch7pVo.png" alt="User" class="review-avatar">
+                    <div class="review-author">Morela</div>
+                    <div class="review-role">Klient</div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="partners-section reveal">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: 30px;">
+                     <h2>Partnerzy</h2>
+                     <p>Współpracują z nami najlepsi</p>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slide"><img src="https://imgur.com/FuiWh71.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/Levkz0J.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/wetHf8Y.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/viRFbWJ.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/4TDkNsM.png" alt="Partner"></div>
+                        
+                        <div class="slide"><img src="https://imgur.com/FuiWh71.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/Levkz0J.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/wetHf8Y.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/viRFbWJ.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/4TDkNsM.png" alt="Partner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
+    <div class="wave-container">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+            <path class="wave-fill" d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
+        </svg>
+    </div>
+
     <footer>
-        <div class="container" style="text-align:center; padding:40px 20px;">
-            <h2 class="mc-font" style="margin-bottom:10px; color:var(--primary-color);">Wytwórnia Serwerów</h2>
-            <p style="color:var(--secondary-text);">Tworzymy z pasją dla graczy.</p>
-            <div style="margin: 20px 0;">
-                <a onclick="switchCategory('rules')" style="color:var(--text-color); margin:0 10px; cursor:pointer;">Regulamin</a>
-                <a onclick="switchCategory('howto')" style="color:var(--text-color); margin:0 10px; cursor:pointer;">Kontakt</a>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Wytwórnia Serwerów</h4>
+                    <p style="color: #888; line-height: 1.6;">Jesteśmy grupą tworzącą profesjonalne rozwiązania dla serwerów Minecraft i społeczności Discord. </p>
+                    <div class="social-icons">
+                        <a href="https://dc.gg/wytworniaserwerow" class="social-btn" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://youtube.com/@wytworniaserwerow" class="social-btn" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Nawigacja</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="switchCategory('discord')"><i class="fas fa-angle-right"></i> Serwery Discord</a></li>
+                        <li><a href="#" onclick="switchCategory('thumbnails')"><i class="fas fa-angle-right"></i> Grafika</a></li>
+                        <li><a href="#" onclick="switchCategory('scripts')"><i class="fas fa-angle-right"></i> Skrypty</a></li>
+                        <li><a href="#collab"><i class="fas fa-angle-right"></i> Współpraca</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-envelope"></i> wytworniaserwerow@gmail.com</a></li>
+                        <li><a href="https://dc.gg/wytworniaserwerow"><i class="fab fa-discord"></i> dc.gg/wytworniaserwerow</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Pomoc: 16-21/7</a></li>
+                    </ul>
+                </div>
             </div>
-            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2026 Wytwórnia Serwerów</p>
+            
+            <div class="footer-bottom">
+                &copy; 2026 Wytwórnia Serwerów. Wszelkie prawa zastrzeżone.
+            </div>
         </div>
     </footer>
+
+    <div id="adPopup" class="ad-popup">
+        <div class="ad-header">
+            <span class="ad-title">OFERTA DLA TWÓRCÓW</span>
+            <span class="ad-close" onclick="closeAd()"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="ad-content">
+            <p style="margin-bottom:10px;">Zgarnij <strong>2 darmowe miniaturki</strong> za darmo!</p>
+            <img src="https://imgur.com/RV41Sh2.png" alt="Promo">
+            <p style="font-size:0.9rem; color:var(--secondary-text)">Wymagania: <strong>10 subskrypcji</strong></p>
+            <button class="ad-btn" onclick="closeAd()">Rozumiem!</button>
+        </div>
+    </div>
 
     <div id="productModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span id="modalTitle" class="modal-title">Nazwa Produktu</span>
+                <span id="modalTitle" class="modal-title">Produkt</span>
                 <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
             </div>
-            
             <div class="modal-body">
-                <img id="modalImg" src="" alt="Produkt" class="modal-img">
-                
-                <div class="modal-price-row">
-                    <div id="modalPrice" class="modal-price">0 PLN</div>
-                    <div style="font-family: var(--minecraft-font); font-size: 1.2rem;">Stan: <span style="color:#2ecc71">Dostępny</span></div>
+                <img id="modalImg" src="" alt="Produkt" class="modal-img" style="width:100%; max-height:200px; object-fit:contain; margin-bottom:20px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:1.5rem; font-family:var(--minecraft-font);">
+                    <div id="modalPrice" style="color:var(--primary-color)">Cena</div>
+                    <div style="color:#2ecc71">Dostępny</div>
                 </div>
-
-                <div id="modalDesc" class="modal-desc"></div>
-
-                <div class="modal-tutorial-mini">
-                    <h5><i class="fas fa-info-circle"></i> Jak kupić?</h5>
-                    <ol style="margin-left: 20px; margin-top:5px;">
-                        <li>Wejdź na Discord <a href="https://dc.gg/wytworniaserwerow">dc.gg/wytworniaserwerow</a></li>
-                        <li>Znajdź odpowiedni kanał "zamówienia"</li>
-                        <li>Stwórz ticket i napisz co chcesz kupić</li>
-                    </ol>
+                <div id="modalDesc"></div>
+                <div style="background:rgba(255,0,84,0.1); padding:15px; border-left:4px solid var(--primary-color); margin:20px 0;">
+                    <strong style="color:white"><i class="fas fa-info-circle"></i> Jak kupić?</strong>
+                    <br><span style="color:#ddd">Aby zakupić ten produkt, wejdź na nasz Discord i utwórz ticket w dziale zamówień.</span>
                 </div>
-
-                <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" style="text-align: center; border-radius:4px;">
+                <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" style="text-align:center; border-radius:4px;">
                     <i class="fab fa-discord"></i> PRZEJDŹ DO ZAMÓWIENIA
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="notification-container" id="notificationContainer"></div>
+    <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="floating-discord" title="Napisz do nas!">
+        <i class="fab fa-discord"></i>
+    </a>
 
     <script>
-        // --- KONFIGURACJA PRODUKTÓW I WYSZUKIWARKI ---
+        // --- PROSTA BAZA PRODUKTÓW DLA WYSZUKIWARKI ---
         const products = [
             { name: "Serwer Starter", id: "prod-starter", category: "discord" },
             { name: "Serwer Standard", id: "prod-standard", category: "discord" },
-            { name: "Serwer Standard+", id: "prod-standardplus", category: "discord" },
             { name: "Serwer Premium", id: "prod-premium", category: "discord" },
-            { name: "Serwer Deluxe (BOT)", id: "prod-deluxe", category: "discord" },
+            { name: "Serwer Deluxe", id: "prod-deluxe", category: "discord" },
             { name: "Miniaturka Prosta", id: "prod-mini-prosta", category: "thumbnails" },
-            { name: "Miniaturka Profesjonalna", id: "prod-mini-prof", category: "thumbnails" },
+            { name: "Miniaturka PRO", id: "prod-mini-prof", category: "thumbnails" },
             { name: "Skrypt Logowanie", id: "prod-skrypt-login", category: "scripts" },
-            { name: "Skrypt na Zamówienie", id: "prod-skrypt-custom", category: "scripts" }
+            { name: "Skrypt Custom", id: "prod-skrypt-custom", category: "scripts" }
         ];
 
+        // --- WYSZUKIWARKA ---
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
             searchResults.innerHTML = '';
+            if (query.length < 2) { searchResults.style.display = 'none'; return; }
             
-            if (query.length < 2) {
-                searchResults.style.display = 'none';
-                return;
-            }
-
             const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-
             if (filtered.length > 0) {
                 searchResults.style.display = 'block';
                 filtered.forEach(p => {
                     const div = document.createElement('div');
                     div.className = 'search-item';
                     div.innerHTML = `<span>${p.name}</span> <span style="font-size:0.8em; opacity:0.7;">${p.category.toUpperCase()}</span>`;
-                    div.onclick = () => goToProduct(p.id, p.category);
+                    div.onclick = () => {
+                        switchCategory(p.category);
+                        setTimeout(() => {
+                            const el = document.getElementById(p.id);
+                            if(el) {
+                                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                el.style.borderColor = "var(--primary-color)";
+                                el.style.boxShadow = "0 0 30px var(--primary-glow)";
+                                setTimeout(() => { el.style.borderColor = ""; el.style.boxShadow = ""; }, 2000);
+                            }
+                        }, 300);
+                        searchResults.style.display = 'none';
+                        searchInput.value = '';
+                    };
                     searchResults.appendChild(div);
                 });
-            } else {
-                searchResults.style.display = 'none';
-            }
+            } else { searchResults.style.display = 'none'; }
         });
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-box')) {
-                searchResults.style.display = 'none';
-            }
-        });
-
-        function goToProduct(elementId, category) {
-            switchCategory(category);
-            searchInput.value = '';
-            searchResults.style.display = 'none';
-
-            setTimeout(() => {
-                const element = document.getElementById(elementId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    element.style.borderColor = "var(--primary-color)";
-                    element.style.boxShadow = "0 0 30px var(--primary-glow)";
-                    setTimeout(() => {
-                        element.style.borderColor = "";
-                        element.style.boxShadow = "";
-                    }, 2000);
-                }
-            }, 300);
-        }
-
-        // --- ZMIANA KATEGORII ---
+        // --- NAWIGACJA I KATEGORIE ---
         function switchCategory(catId) {
             document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
             const target = document.getElementById(catId);
             if(target) target.classList.add('active');
             
-            // Obsługa przycisków
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
             const btns = Array.from(document.querySelectorAll('.cat-btn'));
             const activeBtn = btns.find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(catId));
             if(activeBtn) activeBtn.classList.add('active');
-            
-            window.scrollTo(0, 400);
         }
 
-        // --- MODAL LOGIC ---
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const links = document.getElementById('topLinks');
+            if(links.classList.contains('active')) toggleMobileMenu();
+        }
+
+        // --- MODAL ---
         const modal = document.getElementById('productModal');
 
         function openModal(btnElement) {
             const card = btnElement.closest('.card');
             const title = card.querySelector('.card-header h3').innerText;
-            
-            let price = "Do ustalenia";
-            const priceEl = card.querySelector('.price');
-            if(priceEl) price = priceEl.innerText;
-
+            const price = card.querySelector('.price').innerText;
             const bodyContent = card.querySelector('.card-body').cloneNode(true);
+            // Czyszczenie klona
+            const p = bodyContent.querySelector('.price'); if(p) p.remove();
+            const img = bodyContent.querySelector('.product-img-source'); 
+            let imgSrc = "";
+            if(img) { imgSrc = img.src; img.remove(); }
             
-            const clonedPrice = bodyContent.querySelector('.price');
-            if(clonedPrice) clonedPrice.remove();
-            
-            const clonedImg = bodyContent.querySelector('.product-img-source');
-            let imgSrc = "https://imgur.com/FuiWh71.png";
-            if(clonedImg) {
-                imgSrc = clonedImg.src;
-                clonedImg.remove();
-            }
-
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = price;
-            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalImg').src = imgSrc || "https://imgur.com/FuiWh71.png";
             
-            const modalDesc = document.getElementById('modalDesc');
-            modalDesc.innerHTML = '';
-            modalDesc.appendChild(bodyContent);
-
+            const desc = document.getElementById('modalDesc');
+            desc.innerHTML = '';
+            desc.appendChild(bodyContent);
+            
+            modal.classList.remove('closing');
             modal.classList.add('active');
         }
 
-        function closeModal() {
-            modal.classList.remove('active');
+        function closeModal() { 
+            modal.classList.add('closing');
+            setTimeout(() => {
+                modal.classList.remove('active');
+                modal.classList.remove('closing');
+            }, 300); // Wait for animation
         }
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
+        window.onclick = function(event) { if (event.target == modal) closeModal(); }
+
+        // --- FAQ ACCORDION ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // --- STATS ANIMATION (LICZNIKI) ---
+        const counters = document.querySelectorAll('.counter-number');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // --- SCROLL REVEAL & TRIGGER COUNTERS ---
+        let countersTriggered = false;
+        window.addEventListener('scroll', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            // Reveal elements
+            reveals.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+
+            // Trigger counters
+            const statsSection = document.querySelector('.stats-section');
+            if(statsSection) {
+                const statsTop = statsSection.getBoundingClientRect().top;
+                if(statsTop < windowHeight - 50 && !countersTriggered) {
+                    animateCounters();
+                    countersTriggered = true;
+                }
             }
-        }
+        });
 
         // --- MENU MOBILNE ---
         function toggleMobileMenu() {
             const links = document.getElementById('topLinks');
             const icon = document.querySelector('.hamburger i');
-            
             links.classList.toggle('active');
-            
             if(links.classList.contains('active')){
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
@@ -1289,7 +1531,7 @@
             }
         }
 
-        // --- DARK / LIGHT MODE ---
+        // --- THEME SWITCHER ---
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -1297,67 +1539,50 @@
             
             if (currentTheme === 'light') {
                 html.setAttribute('data-theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
+                icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
                 localStorage.setItem('theme', 'dark');
             } else {
                 html.setAttribute('data-theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+                icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
                 localStorage.setItem('theme', 'light');
             }
         }
-
-        // Wczytanie motywu przy starcie
+        
+        // Init Theme
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             document.documentElement.setAttribute('data-theme', savedTheme);
             const icon = document.getElementById('themeIcon');
-            if(savedTheme === 'dark') {
+            if(savedTheme === 'light') {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
             }
+        } else {
+            // Default dark
+             document.getElementById('themeIcon').classList.add('fa-sun');
         }
 
-        // --- POWIADOMIENIA (TOAST) ---
-        function showNotification(title, message, link) {
-            const container = document.getElementById('notificationContainer');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            
-            toast.innerHTML = `
-                <i class="fas fa-vote-yea"></i>
-                <div class="toast-content">
-                    <span class="toast-title">${title}</span>
-                    <span class="toast-msg">${message}</span>
-                </div>
-            `;
-            
-            if(link) {
-                toast.onclick = () => window.open(link, '_blank');
-            }
+        // --- POPUP REKLAMY ---
+        setTimeout(() => {
+            const popup = document.getElementById('adPopup');
+            popup.classList.add('show');
+        }, 5000); // Popup po 5 sekundach
 
-            container.appendChild(toast);
-
-            // Automatyczne ukrycie po 10 sekundach
+        function closeAd() {
+            const popup = document.getElementById('adPopup');
+            popup.classList.add('closing');
             setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                setTimeout(() => toast.remove(), 500);
-            }, 10000);
+                popup.classList.remove('show');
+                popup.classList.remove('closing');
+                popup.style.display = 'none'; // Force hide
+            }, 500); // Wait for animation
         }
 
-        // Uruchomienie powiadomienia po załadowaniu
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                showNotification(
-                    "Zagłosuj na nas!",
-                    "Kliknij, aby zagłosować na Discordzik.pl",
-                    "https://discordzik.pl/server/wytworniaserwerow"
-                );
-            }, 2000); // 2 sekundy po wejściu
-        });
-
+        // Trigger reveal on load
+        window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
 </html>
