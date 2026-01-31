@@ -128,7 +128,8 @@
             text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
         }
 
-        .logo a:hover .logo-img { transform: scale(1.1) rotate(-5deg); }
+        .logo a:hover .logo-img { transform: scale(1.1) rotate(-5deg);
+        }
 
         /* Wyszukiwarka */
         .search-box {
@@ -172,8 +173,10 @@
         }
 
         @keyframes fadeInResults {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0;
+            transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0);
+            }
         }
 
         .search-item {
@@ -184,11 +187,14 @@
             font-size: 1.2rem;
             display: flex; justify-content: space-between;
         }
-        .search-item:hover { background-color: var(--primary-color); color: white; }
+        .search-item:hover { background-color: var(--primary-color); color: white;
+        }
 
         /* Menu linki */
-        .nav-right-section { display: flex; align-items: center; gap: 20px; }
-        .top-links { display: flex; gap: 25px; align-items: center; }
+        .nav-right-section { display: flex;
+            align-items: center; gap: 20px; }
+        .top-links { display: flex; gap: 25px; align-items: center;
+        }
 
         .menu-link {
             text-decoration: none;
@@ -211,8 +217,10 @@
             transition: width 0.3s;
             box-shadow: 0 0 8px var(--primary-color);
         }
-        .menu-link:hover::after { width: 100%; }
-        .menu-link:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-glow); }
+        .menu-link:hover::after { width: 100%;
+        }
+        .menu-link:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-glow);
+        }
 
         .theme-switch {
             background: transparent;
@@ -224,8 +232,10 @@
             font-size: 1.2rem;
             transition: 0.3s;
         }
-        .theme-switch:hover { border-color: var(--primary-color); box-shadow: 0 0 10px var(--primary-glow); }
-        .hamburger { display: none; background: none; border: none; color: var(--text-color); font-size: 2rem; cursor: pointer; }
+        .theme-switch:hover { border-color: var(--primary-color); box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .hamburger { display: none; background: none; border: none; color: var(--text-color); font-size: 2rem;
+        cursor: pointer; }
 
         /* --- HEADER & STATS --- */
         header {
@@ -259,9 +269,12 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px);
+            }
+            50% { transform: translateY(-15px);
+            }
+            100% { transform: translateY(0px);
+            }
         }
 
         /* --- SEKCJA LICZNIKÓW (STATS) --- */
@@ -336,22 +349,28 @@
         }
 
         /* --- GRID PRODUKTÓW --- */
-        .section-content { display: none; animation: fadeIn 0.6s ease; }
-        .section-content.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .section-content { display: none;
+            animation: fadeIn 0.6s ease; }
+        .section-content.active { display: block;
         }
 
-        .section-header { text-align: center; margin-bottom: 50px; }
+        @keyframes fadeIn {
+            from { opacity: 0;
+            transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0);
+            }
+        }
+
+        .section-header { text-align: center;
+            margin-bottom: 50px; }
         .section-header h2 { 
             font-size: 3.5rem;
             color: var(--text-color); 
             margin-bottom: 10px;
             text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
         }
-        .section-header p { font-size: 1.1rem; color: var(--secondary-text); }
+        .section-header p { font-size: 1.1rem;
+            color: var(--secondary-text); }
 
         .grid {
             display: grid;
@@ -384,9 +403,11 @@
             text-align: center;
             border-bottom: 2px solid var(--primary-color);
         }
-        .card-header h3 { font-size: 1.8rem; margin: 0; }
+        .card-header h3 { font-size: 1.8rem; margin: 0;
+        }
 
-        .card-body { padding: 30px; flex-grow: 1; text-align: center; }
+        .card-body { padding: 30px; flex-grow: 1; text-align: center;
+        }
 
         .card-img-placeholder {
             width: 90px;
@@ -395,7 +416,8 @@
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
             transition: transform 0.3s;
         }
-        .card:hover .card-img-placeholder { transform: scale(1.1) rotate(5deg); }
+        .card:hover .card-img-placeholder { transform: scale(1.1) rotate(5deg);
+        }
 
         .price {
             font-size: 2.8rem;
@@ -405,7 +427,8 @@
             text-shadow: 0 0 15px var(--primary-glow);
         }
 
-        .features-list { list-style: none; text-align: left; margin-bottom: 20px; }
+        .features-list { list-style: none; text-align: left; margin-bottom: 20px;
+        }
         .features-list li {
             margin-bottom: 12px;
             padding-left: 35px;
@@ -423,7 +446,8 @@
             font-size: 1rem; top: 2px;
         }
 
-        .card-footer { padding: 20px; border-top: 1px solid var(--card-border); background: rgba(0,0,0,0.02); }
+        .card-footer { padding: 20px; border-top: 1px solid var(--card-border); background: rgba(0,0,0,0.02);
+        }
 
         .buy-btn {
             background: var(--primary-color);
@@ -485,7 +509,8 @@
             background: var(--primary-color);
             opacity: 0; transition: 0.3s;
         }
-        .info-card:hover::before { opacity: 1; }
+        .info-card:hover::before { opacity: 1;
+        }
 
         .info-icon {
             background: var(--primary-color);
@@ -498,11 +523,14 @@
             box-shadow: 0 5px 15px var(--primary-glow);
         }
 
-        .info-content h4 { font-size: 1.5rem; font-family: var(--minecraft-font); margin-bottom: 10px; }
-        .info-content p { color: var(--secondary-text); font-size: 0.95rem; line-height: 1.6; }
+        .info-content h4 { font-size: 1.5rem;
+            font-family: var(--minecraft-font); margin-bottom: 10px; }
+        .info-content p { color: var(--secondary-text); font-size: 0.95rem;
+            line-height: 1.6; }
 
         /* --- FAQ SECTION --- */
-        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-container { max-width: 800px;
+            margin: 0 auto; }
         
         .faq-item {
             background: var(--card-bg);
@@ -526,9 +554,12 @@
             justify-content: space-between; align-items: center;
         }
         
-        .faq-question:hover { color: var(--primary-color); }
-        .faq-question i { transition: 0.3s; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--primary-color); }
+        .faq-question:hover { color: var(--primary-color);
+        }
+        .faq-question i { transition: 0.3s;
+        }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--primary-color);
+        }
 
         .faq-answer {
             max-height: 0;
@@ -539,7 +570,8 @@
             padding: 0 20px;
         }
         
-        .faq-item.active .faq-answer { max-height: 200px; padding: 20px; border-top: 1px solid var(--card-border); }
+        .faq-item.active .faq-answer { max-height: 200px;
+            padding: 20px; border-top: 1px solid var(--card-border); }
 
         /* --- ZAUFALI NAM (ULEPSZONE) --- */
         .reviews-grid {
@@ -556,7 +588,8 @@
             text-align: center;
             position: relative;
         }
-        .review-card:hover { border-color: var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .review-card:hover { border-color: var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
         
         .review-avatar {
             width: 80px;
@@ -566,9 +599,12 @@
             margin: 0 auto 15px;
             padding: 3px;
         }
-        .review-quote { font-style: italic; color: var(--secondary-text); margin-bottom: 20px; }
-        .review-author { font-weight: bold; font-family: var(--minecraft-font); font-size: 1.4rem; color: var(--text-color); }
-        .review-role { font-size: 0.85rem; color: var(--primary-color); text-transform: uppercase; font-weight: bold; }
+        .review-quote { font-style: italic; color: var(--secondary-text); margin-bottom: 20px;
+        }
+        .review-author { font-weight: bold; font-family: var(--minecraft-font); font-size: 1.4rem; color: var(--text-color);
+        }
+        .review-role { font-size: 0.85rem; color: var(--primary-color); text-transform: uppercase; font-weight: bold;
+        }
 
         /* --- SEKCJA PARTNERZY (ANIMOWANY SLIDER) --- */
         .partners-section {
@@ -617,8 +653,10 @@
         }
         
         @keyframes scrollPartners {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-150px * 5)); } /* Przesuwamy o połowę tracku */
+            0% { transform: translateX(0);
+            }
+            100% { transform: translateX(calc(-150px * 5));
+            } /* Przesuwamy o połowę tracku */
         }
 
         /* --- WAVE & FOOTER --- */
@@ -636,7 +674,8 @@
             width: calc(100% + 1.3px);
             height: 100px;
         }
-        .wave-fill { fill: var(--footer-bg); }
+        .wave-fill { fill: var(--footer-bg);
+        }
 
         footer {
             background: var(--footer-bg);
@@ -666,14 +705,17 @@
             background: var(--primary-color);
         }
 
-        .footer-links li { list-style: none; margin-bottom: 12px; }
+        .footer-links li { list-style: none; margin-bottom: 12px;
+        }
         .footer-links a {
             color: #888;
             text-decoration: none; transition: 0.2s; display: flex; align-items: center; gap: 10px;
         }
-        .footer-links a:hover { color: var(--primary-color); padding-left: 5px; }
+        .footer-links a:hover { color: var(--primary-color); padding-left: 5px;
+        }
 
-        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px;
+        }
         .social-btn {
             width: 40px;
             height: 40px;
@@ -684,7 +726,8 @@
             text-decoration: none;
             transition: 0.3s;
         }
-        .social-btn:hover { background: var(--primary-color); transform: translateY(-3px); }
+        .social-btn:hover { background: var(--primary-color); transform: translateY(-3px);
+        }
 
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -715,14 +758,15 @@
         
         /* Animacja otwierania i zamykania zawartości */
         .modal-content {
-            background-color: var(--modal-bg);
+            background-color: var(--card-bg); /* Poprawiono tło (wcześniej modal-bg nie istniało i było tło obrazkowe) */
             border: 2px solid var(--primary-color);
             box-shadow: 0 0 30px var(--primary-glow);
             width: 100%; max-width: 650px;
             position: relative; display: flex; flex-direction: column;
             max-height: 90vh; border-radius: 8px; overflow: hidden;
-            background-image: url('https://imgur.com/h3R72Rt.png');
-            background-size: cover;
+            /* USUNIĘTO TŁO OBRAZKOWE ZGODNIE Z PROŚBĄ */
+            /* background-image: url('https://imgur.com/h3R72Rt.png'); */
+            /* background-size: cover; */
             transform: scale(0.8);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -749,16 +793,18 @@
         .close-modal { color: #fff;
             font-size: 2rem;
         cursor: pointer; transition: 0.2s; }
-        .close-modal:hover { color: var(--primary-color); transform: rotate(90deg); }
+        .close-modal:hover { color: var(--primary-color); transform: rotate(90deg);
+        }
         .modal-body { 
             padding: 30px;
             overflow-y: auto; 
-            color: #fff; 
-            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--text-color); /* Zmieniono z #fff, aby pasowało do tła */
+            background-color: var(--card-bg); /* Zmieniono z rgba(0,0,0,0.7) */
             z-index: 2;
         }
         
-        .modal-body .stat-desc, .modal-body li { color: #ddd !important; }
+        .modal-body .stat-desc, .modal-body li { color: var(--secondary-text) !important;
+        }
 
         /* Floating Discord Button */
         .floating-discord {
@@ -776,7 +822,7 @@
             text-decoration: none;
         }
         .floating-discord:hover { transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 30px rgba(88, 101, 242, 0.8); }
+        box-shadow: 0 0 30px rgba(88, 101, 242, 0.8); }
 
         /* --- POPUP REKLAMOWY --- */
         .ad-popup {
@@ -804,13 +850,17 @@
         }
         
         @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(-100%);
+            opacity: 0; }
+            to { transform: translateX(0); opacity: 1;
+            }
         }
 
         @keyframes slideOutLeft {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(-120%); opacity: 0; }
+            from { transform: translateX(0);
+            opacity: 1; }
+            to { transform: translateX(-120%); opacity: 0;
+            }
         }
 
         .ad-header {
@@ -819,31 +869,41 @@
         }
         .ad-title { color: var(--primary-color); font-family: var(--minecraft-font);
             font-size: 1.5rem; }
-        .ad-close { cursor: pointer; color: var(--text-color); font-size: 1.2rem; }
-        .ad-content img { width: 100%; border-radius: 5px; margin-bottom: 10px; }
+        .ad-close { cursor: pointer; color: var(--text-color); font-size: 1.2rem;
+        }
+        .ad-content img { width: 100%; border-radius: 5px; margin-bottom: 10px;
+        }
         .ad-btn {
             background: var(--primary-color);
             color: white; border: none; padding: 8px; width: 100%;
             cursor: pointer; border-radius: 4px; font-weight: bold; margin-top: 5px;
             transition: 0.3s;
         }
-        .ad-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
+        .ad-btn:hover { background: var(--primary-dark); transform: scale(1.02);
+        }
 
         /* Mobile */
         @media (max-width: 900px) {
-            nav { height: 70px; }
-            .logo-text { font-size: 1.5rem; }
-            .logo-img { height: 35px; }
-            .hamburger { display: block; order: 1; margin-left: 15px;}
-            .search-box { display: none; }
-            .theme-switch { order: 2; margin-left: 5px; }
+            nav { height: 70px;
+            }
+            .logo-text { font-size: 1.5rem;
+            }
+            .logo-img { height: 35px;
+            }
+            .hamburger { display: block; order: 1;
+            margin-left: 15px;}
+            .search-box { display: none;
+            }
+            .theme-switch { order: 2; margin-left: 5px;
+            }
             .top-links {
                 position: absolute;
                 top: 70px; right: 0;
                 background: var(--card-bg);
                 border-bottom: 4px solid var(--primary-color);
                 width: 100%; flex-direction: column; padding: 20px 0;
-                display: flex; /* Changed from none to handle animation */
+                display: flex;
+                /* Changed from none to handle animation */
                 box-shadow: 0 10px 20px rgba(0,0,0,0.5);
                 transform: translateY(-20px);
                 opacity: 0;
@@ -855,8 +915,10 @@
                 opacity: 1;
                 pointer-events: auto;
             }
-            .section-header h2 { font-size: 2.5rem; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .section-header h2 { font-size: 2.5rem;
+            }
+            .stats-grid { grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -867,6 +929,7 @@
             <div class="logo">
                 <a href="#" onclick="window.scrollTo(0,0)">
                     <img src="https://imgur.com/FuiWh71.png" alt="Logo" class="logo-img">
+                    
                     <span class="logo-text">Wytwórnia Serwerów</span>
                 </a>
             </div>
@@ -876,11 +939,13 @@
                 <div id="searchResults" class="search-results"></div>
             </div>
 
+      
             <div class="nav-right-section">
                 <div class="top-links" id="topLinks">
                     <a class="menu-link" onclick="scrollToSection('collab')">Współpraca</a>
                     <a class="menu-link" onclick="scrollToSection('howto')">Jak kupić?</a>
                     <a class="menu-link" onclick="scrollToSection('payments-section')">Wymiana</a>
+        
                     <a class="menu-link" onclick="scrollToSection('faq-section')">FAQ</a>
                 </div>
 
@@ -888,6 +953,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
 
+              
                 <button class="theme-switch" onclick="toggleTheme()" title="Przełącz tryb">
                      <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
@@ -898,6 +964,7 @@
     <header>
         <div class="banner-bg-blur"></div>
         <img src="https://imgur.com/KfASXkA.png" alt="Wytwórnia Serwerów Banner" class="banner-img">
+    
     </header>
 
     <section class="stats-section">
@@ -906,16 +973,19 @@
                 <div class="stat-item reveal">
                     <i class="fas fa-users"></i>
                     <span class="counter-number" data-target="33">0</span>
+          
                     <span class="stat-desc">Zadowolonych Klientów</span>
                 </div>
                 <div class="stat-item reveal">
                     <i class="fas fa-server"></i>
                     <span class="counter-number" data-target="16">0</span>
+          
                     <span class="stat-desc">Stworzonych Serwerów</span>
                 </div>
                 <div class="stat-item reveal">
                     <i class="fas fa-image"></i>
                     <span class="counter-number" data-target="25">0</span>
+          
                     <span class="stat-desc">Stworzonych Miniaturek</span>
                 </div>
 
@@ -927,7 +997,8 @@
 
         <div class="category-tabs reveal">
             <button class="cat-btn active" onclick="switchCategory('discord')"><i class="fab fa-discord"></i> Serwery Dicord</button>
-            <button class="cat-btn" onclick="switchCategory('thumbnails')"><i class="fas fa-image"></i> Miniaturki</button>
+            <button class="cat-btn" 
+                onclick="switchCategory('thumbnails')"><i class="fas fa-image"></i> Miniaturki</button>
             <button class="cat-btn" onclick="switchCategory('scripts')"><i class="fas fa-scroll"></i> Skrypty Minecraft</button>
         </div>
 
@@ -935,75 +1006,94 @@
             <div class="section-header">
                 <h2>Gotowe Paczki Discord</h2>
                 <p>Profesjonalnie skonfigurowane serwery gotowe do działania</p>
+        
             </div>
             <div class="grid">
                 <div class="card" id="prod-starter">
                     <div class="card-header"><h3>Starter</h3></div>
                     <div class="card-body">
+                       
                         <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
                         <div class="price">500k</div>
                         <ul class="features-list">
                             <li>Podstawowa konfiguracja</li>
+                 
                             <li>Weryfikacja, role, uprawnienia</li>
                             <li>Podstawowe zabezpieczenia</li>
                             <li>Uproszczony panel ticketów</li>
+                            
                             <li>Kanały powitań i pożegnań</li>
                             <li>Role za reakcję (proste)</li>
                         </ul>
                     </div>
-                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
+                    <div class="card-footer"><button 
+                        class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
                 <div class="card" id="prod-standard">
                     <div class="badge">HIT</div>
                     <div class="card-header"><h3>Standard</h3></div>
                     <div class="card-body">
+  
                         <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
                         <div class="price">1 MLN</div>
                         <ul class="features-list">
+                        
                             <li>Wszystko ze Startera</li>
                             <li>Rozbudowane kanały 4fun</li>
                             <li>Kanał changelog</li>
                             <li>Lepsze zabezpieczenia</li>
+      
                             <li>Automoderacja (podstawowa)</li>
                             <li>System poziomów (Leveling)</li>
                             <li>Statystyki serwera (Voice)</li>
+                 
                         </ul>
                     </div>
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
                 <div class="card" id="prod-premium">
+                
                     <div class="card-header"><h3>Premium</h3></div>
                     <div class="card-body">
                         <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
                         <div class="price">10 MLN</div>
+                     
                         <ul class="features-list">
                             <li>Zaawansowany panel ticketów</li>
                             <li>System "Wprowadzenie"</li>
                             <li><strong>Grafiki od grafika</strong></li>
+       
                             <li>Pełna personalizacja</li>
                             <li>Logi serwerowe (Audit)</li>
                             <li>Anty-raid protection</li>
+                   
                             <li>Ekonomia serwerowa</li>
                         </ul>
                     </div>
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
+       
                 <div class="card" id="prod-deluxe">
-                    <div class="badge" style="background:gold; color:black;">VIP</div>
+                    <div class="badge" style="background:gold;
+                        color:black;">VIP</div>
                     <div class="card-header"><h3>Deluxe</h3></div>
                     <div class="card-body">
                         <img src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg" class="card-img-placeholder product-img-source">
                         <div class="price">20 MLN</div>
+     
                         <ul class="features-list">
                             <li>Wszystko z Premium</li>
                             <li>Zaawansowana weryfikacja</li>
+                     
                             <li>Bump + Bump Dzik</li>
                             <li><strong>Autorski BOT!</strong></li>
                             <li>Backup serwera</li>
                             <li>Priorytetowe wsparcie 24/7</li>
+  
                             <li>Indywidualne ikony ról</li>
                             <li>Konfiguracja botów muzycznych</li>
                         </ul>
+                  
                     </div>
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
@@ -1012,38 +1102,48 @@
 
         <section id="thumbnails" class="section-content">
             <div class="section-header">
+                
                 <h2>Miniaturki YouTube</h2>
                 <p>Zwiększ klikalność swoich filmów</p>
             </div>
             <div class="grid">
                 <div class="card" id="prod-mini-prosta">
                     <div class="card-header"><h3>Miniaturka Prosta</h3></div>
+               
                     <div class="card-body">
-                        <img src="https://imgur.com/Odc9Qnz.png" class="img-preview product-img-source" style="width:100%; border-radius:4px; margin-bottom:15px;">
+                        <img src="https://imgur.com/Odc9Qnz.png" class="img-preview product-img-source" style="width:100%;
+                            border-radius:4px; margin-bottom:15px;">
                         <div class="price">500 K</div>
                         <p>Czysty design, czytelne napisy. Idealna na start.</p>
                         <ul class="features-list" style="margin-top:15px;">
+                 
                              <li>Rozdzielczość 1920x1080</li>
                              <li>Do 2 poprawek</li>
                              <li>Szybki czas realizacji</li>
                         </ul>
+ 
                     </div>
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
                 <div class="card" id="prod-mini-prof">
                     <div class="card-header"><h3>Miniaturka PRO</h3></div>
+  
                     <div class="card-body">
-                        <img src="https://imgur.com/RV41Sh2.png" class="img-preview product-img-source" style="width:100%; border-radius:4px; margin-bottom:15px;">
+                        <img src="https://imgur.com/RV41Sh2.png" class="img-preview product-img-source" style="width:100%;
+                            border-radius:4px; margin-bottom:15px;">
                         <div class="price">1,3 MLN</div>
                         <p>Zaawansowane cieniowanie, efekty świetlne, renderowanie 3D postaci.</p>
                         <ul class="features-list" style="margin-top:15px;">
+                 
                              <li>Render 3D Twojego skina</li>
                              <li>Nielimitowane poprawki</li>
                              <li>Plik PSD w zestawie</li>
+                       
                              <li>Najwyższa jakość tekstur</li>
                              <li>Clickbaitowe efekty</li>
                         </ul>
                     </div>
+                  
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
             </div>
@@ -1052,20 +1152,38 @@
         <section id="scripts" class="section-content">
             <div class="section-header">
                 <h2>Skrypty Minecraft (.sk)</h2>
-                <p>Automatyzacja i unikalne mechaniki</p>
+                <p>Automatyzacja i 
+                    unikalne mechaniki</p>
             </div>
             <div class="grid">
                 <div class="card" id="prod-skrypt-login">
                     <div class="card-header"><h3>System Logowania</h3></div>
                     <div class="card-body">
+             
                         <img src="https://cdn-icons-png.flaticon.com/512/2303/2303943.png" class="card-img-placeholder product-img-source">
                         <div class="price">2 MLN</div>
                         <ul class="features-list">
                             <li>Komendy /login, /register</li>
+     
                             <li>Ochrona przed botami</li>
                             <li>Polskie wiadomości</li>
                             <li>Szyfrowanie haseł</li>
+                 
                             <li>Sesja logowania</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
+                </div>
+
+                <div class="card" id="prod-gamma">
+                    <div class="card-header"><h3>Gamma</h3></div>
+                    <div class="card-body">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2303/2303943.png" class="card-img-placeholder product-img-source">
+                        <div class="price">1,2 MLN</div>
+                        <ul class="features-list">
+                            <li>Włącz/wyłącz za pomocą /gamma</li>
+                            <li>Dostosowane permisje (gdy brakuje permisji wyświetla się wiadomość)</li>
+                            <li>Wiadomości konfigurowalne w pliku</li>
                         </ul>
                     </div>
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
@@ -1074,22 +1192,27 @@
                     <div class="card-header"><h3>Skrypt na Zamówienie</h3></div>
                     <div class="card-body">
                         <img src="https://cdn-icons-png.flaticon.com/512/10435/10435165.png" class="card-img-placeholder product-img-source">
+                
                         <div class="price">6.5 MLN</div>
                         <ul class="features-list">
                             <li>Realizacja wg Twojego opisu</li>
                             <li>Czas: 2-5 dni</li>
+    
                             <li>Pełne wsparcie techniczne</li>
                             <li>Optymalizacja kodu</li>
                             <li>Plik konfiguracyjny (YAML)</li>
+               
                             <li>Testy obciążeniowe</li>
                         </ul>
                     </div>
                     <div class="card-footer"><button class="buy-btn" onclick="openModal(this)">Szczegóły</button></div>
                 </div>
+   
             </div>
         </section>
         
-        <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 60px 0;">
+        <hr style="border: 0;
+            border-top: 1px solid var(--card-border); margin: 60px 0;">
 
         <section id="howto" class="reveal" style="margin-bottom: 80px;">
             <div class="section-header">
@@ -1097,59 +1220,73 @@
                 <p>Prosty proces w 4 krokach</p>
             </div>
             <div class="info-card-container">
+      
                 <div class="info-card">
                     <div class="info-icon">1</div>
                     <div class="info-content">
                         <h4>Discord</h4>
+                       
                         <p>Dołącz na nasz serwer Discord. To tam odbywa się cała komunikacja.</p>
                     </div>
                 </div>
                 <div class="info-card">
                     <div class="info-icon">2</div>
+               
                     <div class="info-content">
                         <h4>Wybór</h4>
                         <p>Przejrzyj katalogi na kanałach tekstowych i wybierz interesujący Cię pakiet.</p>
                     </div>
                 </div>
+ 
                 <div class="info-card">
                     <div class="info-icon">3</div>
                     <div class="info-content">
                         <h4>Ticket</h4>
+                  
                         <p>Utwórz ticket (zgłoszenie) w odpowiednim dziale zamówień.</p>
                     </div>
                 </div>
                 <div class="info-card">
                     <div class="info-icon">4</div>
+              
                     <div class="info-content">
                         <h4>Realizacja</h4>
                         <p>Opłać zamówienie i czekaj na realizację przez naszych techników.</p>
                     </div>
                 </div>
+ 
             </div>
         </section>
 
-        <section id="collab" class="reveal" style="background: rgba(0,0,0,0.02); padding: 50px; border-radius: 10px; margin-bottom: 80px;">
+        <section id="collab" class="reveal" style="background: rgba(0,0,0,0.02);
+            padding: 50px; border-radius: 10px; margin-bottom: 80px;">
             <div class="section-header">
                 <h2>Program Partnerski</h2>
                 <p>Jesteś YouTuberem? Mamy dla Ciebie ofertę!</p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center;">
+            <div style="display: flex;
+                flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center;">
                 <div style="max-width: 500px;">
-                    <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 20px;">Ranga Twórca</h3>
+                    <h3 style="font-size: 2rem;
+                        color: var(--primary-color); margin-bottom: 20px;">Ranga Twórca</h3>
                     <ul class="features-list">
                         <li><strong>-20%</strong> zniżki na wszystkie Miniaturki</li>
                         <li><strong>-20%</strong> zniżki na Skrypty MC</li>
+                   
                         <li>Specjalna ranga na Discordzie</li>
                     </ul>
-                    <a href="https://dc.gg/wytworniaserwerow" class="buy-btn" style="text-align: center; margin-top: 20px;">ZGŁOŚ SIĘ</a>
+                    <a href="https://dc.gg/wytworniaserwerow" class="buy-btn" style="text-align: center;
+                        margin-top: 20px;">ZGŁOŚ SIĘ</a>
                 </div>
                 <div style="max-width: 500px;">
                     <h4 style="margin-bottom: 15px;">Wymagania:</h4>
                     <ul class="features-list">
+                     
                         <li>Minimum <strong>200 subskrypcji</strong></li>
                         <li>Regularne filmy/live (min. raz na 2 tyg)</li>
                         <li>Reklama Wytwórni w opisie live i na ekranie</li>
                     </ul>
+              
                 </div>
             </div>
         </section>
@@ -1159,33 +1296,41 @@
                 <h2>Wymiana Walut</h2>
                 <p>Płać walutą z innych trybów i gier</p>
             </div>
+  
             <div class="grid">
                 <div class="card">
                     <div class="card-header"><h3>ROBLOX</h3></div>
                     <div class="card-body">
-                        <div class="price" style="font-size:2rem;">70 RBX = 1 MLN</div>
-                        <p>Możliwość płatności w Robuxach. Stały przelicznik.</p>
+                        <div class="price" style="font-size:2rem;">70 RBX = 1 
+                            MLN</div>
+                        <p>Możliwość płatności w Robuxach.
+                            Stały przelicznik.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header"><h3>Lifesteal</h3></div>
                     <div class="card-body">
+    
                         <div class="price" style="font-size:2rem;">1k $ = 1 MLN</div>
                         <p>Waluta z trybu Lifesteal na Anarchia.gg</p>
                     </div>
                 </div>
+         
                 <div class="card">
                     <div class="card-header"><h3>BoxPvP</h3></div>
                     <div class="card-body">
                         <div class="price" style="font-size:2rem;">120k $ = 1 MLN</div>
+                    
                         <p>Waluta z trybu BoxPvP na Anarchia.gg</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header"><h3>Kupno przedmiotu (ItemShop)</h3></div>
+               
                     <div class="card-body">
                         <div class="price" style="font-size:2rem;">2 PLN = 1 MLN</div>
-                        <p>Kupujesz przedmiot (np. Klucze) na nick administratora/wykonawcy.</p>
+                        <p>Kupujesz przedmiot (np.
+                            Klucze) na nick administratora/wykonawcy.</p>
                     </div>
                 </div>
             </div>
@@ -1193,26 +1338,33 @@
 
         <section id="faq-section" class="reveal" style="margin-bottom: 80px;">
             <div class="section-header">
+                
                 <h2>Częste Pytania (FAQ)</h2>
                 <p>Wszystko, co musisz wiedzieć</p>
             </div>
             <div class="faq-container">
                 <div class="faq-item">
-                    <button class="faq-question">Ile czasu trwa realizacja? <i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">Ile czasu trwa realizacja?
+                        <i class="fas fa-chevron-down"></i></button>
                     <div class="faq-answer">
                         <p>Standardowy czas realizacji to od 30 minut do 7 dni, w zależności od skomplikowania zamówienia i ilości aktualnych zleceń.</p>
                     </div>
+               
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">Czy mogę zapłacić PSC? <i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">Czy mogę zapłacić PSC?
+                        <i class="fas fa-chevron-down"></i></button>
                     <div class="faq-answer">
                         <p>Niestety nie, nie przyjmujemy płatności PaySafeCard, jednak można zapłacić kupując coś w itemshopie serwera (więcej info w zakładce "płatności")</p>
                     </div>
+               
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">Czy otrzymam pomoc po zakupie? <i class="fas fa-chevron-down"></i></button>
+                    <button class="faq-question">Czy otrzymam pomoc po zakupie?
+                        <i class="fas fa-chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>Oczywiście! Każdy klient otrzymuje gwarancję rozruchową oraz wsparcie techniczne w razie problemów z konfiguracją zakupionego produktu.</p>
+                        <p>Oczywiście!
+                            Każdy klient otrzymuje gwarancję rozruchową oraz wsparcie techniczne w razie problemów z konfiguracją zakupionego produktu.</p>
                     </div>
                 </div>
             </div>
@@ -1220,27 +1372,32 @@
 
         <section class="reveal" style="margin-bottom: 60px;">
             <div class="section-header">
+      
                 <h2>Zaufali Nam</h2>
                 <p>Opinie zadowolonych twórców</p>
             </div>
             <div class="reviews-grid">
                 <div class="review-card">
                     <img src="https://imgur.com/n571BdY.png" alt="User" class="review-avatar">
+      
                     <div class="review-author">Gierkauboba</div>
                     <div class="review-role">YouTuber (500+ sub)</div>
                 </div>
                 <div class="review-card">
                     <img src="https://imgur.com/Q2CmKDG.png" alt="User" class="review-avatar">
+      
                     <div class="review-author">Soniczek929</div>
                     <div class="review-role">YouTuber (350+ sub)</div>
                 </div>
                 <div class="review-card">
                     <img src="https://imgur.com/41ndPAT.png" alt="User" class="review-avatar">
+      
                     <div class="review-author">5zymix_</div>
                     <div class="review-role">YouTuber (350+ sub)</div>
                 </div>
                 <div class="review-card">
                      <img src="https://imgur.com/Dch7pVo.png" alt="User" class="review-avatar">
+     
                     <div class="review-author">Morela</div>
                     <div class="review-role">Klient</div>
                 </div>
@@ -1249,22 +1406,27 @@
 
         <section class="partners-section reveal">
             <div class="container">
+    
                 <div class="section-header" style="margin-bottom: 30px;">
                      <h2>Partnerzy</h2>
                      <p>Współpracują z nami najlepsi</p>
                 </div>
                 <div class="slider-container">
+       
                     <div class="slider-track">
                         <div class="slide"><img src="https://imgur.com/FuiWh71.png" alt="Partner"></div>
                         <div class="slide"><img src="https://imgur.com/Levkz0J.png" alt="Partner"></div>
                         <div class="slide"><img src="https://imgur.com/wetHf8Y.png" alt="Partner"></div>
+     
                         <div class="slide"><img src="https://imgur.com/viRFbWJ.png" alt="Partner"></div>
                         <div class="slide"><img src="https://imgur.com/4TDkNsM.png" alt="Partner"></div>
                         
-                        <div class="slide"><img src="https://imgur.com/FuiWh71.png" alt="Partner"></div>
+                        <div class="slide"><img src="https://imgur.com/FuiWh71.png" 
+                            alt="Partner"></div>
                         <div class="slide"><img src="https://imgur.com/Levkz0J.png" alt="Partner"></div>
                         <div class="slide"><img src="https://imgur.com/wetHf8Y.png" alt="Partner"></div>
                         <div class="slide"><img src="https://imgur.com/viRFbWJ.png" alt="Partner"></div>
+                   
                         <div class="slide"><img src="https://imgur.com/4TDkNsM.png" alt="Partner"></div>
                     </div>
                 </div>
@@ -1275,7 +1437,8 @@
 
     <div class="wave-container">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none">
-            <path class="wave-fill" d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
+            <path class="wave-fill" 
+                d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"></path>
         </svg>
     </div>
 
@@ -1284,35 +1447,42 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>Wytwórnia Serwerów</h4>
+                  
                     <p style="color: #888; line-height: 1.6;">Jesteśmy grupą tworzącą profesjonalne rozwiązania dla serwerów Minecraft i społeczności Discord. </p>
                     <div class="social-icons">
                         <a href="https://dc.gg/wytworniaserwerow" class="social-btn" target="_blank"><i class="fab fa-discord"></i></a>
                         <a href="https://youtube.com/@wytworniaserwerow" class="social-btn" target="_blank"><i class="fab fa-youtube"></i></a>
+    
                     </div>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Nawigacja</h4>
+               
                     <ul class="footer-links">
                         <li><a href="#" onclick="switchCategory('discord')"><i class="fas fa-angle-right"></i> Serwery Discord</a></li>
                         <li><a href="#" onclick="switchCategory('thumbnails')"><i class="fas fa-angle-right"></i> Grafika</a></li>
                         <li><a href="#" onclick="switchCategory('scripts')"><i class="fas fa-angle-right"></i> Skrypty</a></li>
+      
                         <li><a href="#collab"><i class="fas fa-angle-right"></i> Współpraca</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Kontakt</h4>
+     
                     <ul class="footer-links">
                         <li><a href="#"><i class="fas fa-envelope"></i> wytworniaserwerow@gmail.com</a></li>
                         <li><a href="https://dc.gg/wytworniaserwerow"><i class="fab fa-discord"></i> dc.gg/wytworniaserwerow</a></li>
-                        <li><a href="#"><i class="fas fa-clock"></i> Pomoc: 16-21/7</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 
+                            Pomoc: 16-21/7</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                &copy; 2026 Wytwórnia Serwerów. Wszelkie prawa zastrzeżone.
+                &copy;
+                2026 Wytwórnia Serwerów. Wszelkie prawa zastrzeżone.
             </div>
         </div>
     </footer>
@@ -1324,6 +1494,7 @@
         </div>
         <div class="ad-content">
             <p style="margin-bottom:10px;">Zgarnij <strong>2 darmowe miniaturki</strong> za darmo!</p>
+ 
             <img src="https://imgur.com/RV41Sh2.png" alt="Promo">
             <p style="font-size:0.9rem; color:var(--secondary-text)">Wymagania: <strong>10 subskrypcji</strong></p>
             <button class="ad-btn" onclick="closeAd()">Rozumiem!</button>
@@ -1333,21 +1504,26 @@
     <div id="productModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span id="modalTitle" class="modal-title">Produkt</span>
+                <span 
+                    id="modalTitle" class="modal-title">Produkt</span>
                 <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
             </div>
             <div class="modal-body">
-                <img id="modalImg" src="" alt="Produkt" class="modal-img" style="width:100%; max-height:200px; object-fit:contain; margin-bottom:20px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:1.5rem; font-family:var(--minecraft-font);">
+                <img id="modalImg" src="" alt="Produkt" class="modal-img" style="width:100%;
+                    max-height:200px; object-fit:contain; margin-bottom:20px;">
+                <div style="display:flex;
+                    justify-content:space-between; margin-bottom:20px; font-size:1.5rem; font-family:var(--minecraft-font);">
                     <div id="modalPrice" style="color:var(--primary-color)">Cena</div>
                     <div style="color:#2ecc71">Dostępny</div>
                 </div>
                 <div id="modalDesc"></div>
-                <div style="background:rgba(255,0,84,0.1); padding:15px; border-left:4px solid var(--primary-color); margin:20px 0;">
-                    <strong style="color:white"><i class="fas fa-info-circle"></i> Jak kupić?</strong>
-                    <br><span style="color:#ddd">Aby zakupić ten produkt, wejdź na nasz Discord i utwórz ticket w dziale zamówień.</span>
+                <div style="background:rgba(255,0,84,0.1);
+                    padding:15px; border-left:4px solid var(--primary-color); margin:20px 0;">
+                    <strong style="color:var(--text-color)"><i class="fas fa-info-circle"></i> Jak kupić?</strong>
+                    <br><span style="color:var(--secondary-text)">Aby zakupić ten produkt, wejdź na nasz Discord i utwórz ticket w dziale zamówień.</span>
                 </div>
-                <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" style="text-align:center; border-radius:4px;">
+                <a href="https://dc.gg/wytworniaserwerow" target="_blank" class="buy-btn" 
+                    style="text-align:center; border-radius:4px;">
                     <i class="fab fa-discord"></i> PRZEJDŹ DO ZAMÓWIENIA
                 </a>
             </div>
@@ -1359,7 +1535,9 @@
     </a>
 
     <script>
+      
         // --- PROSTA BAZA PRODUKTÓW DLA WYSZUKIWARKI ---
+// --- PROSTA BAZA PRODUKTÓW DLA WYSZUKIWARKI ---
         const products = [
             { name: "Serwer Starter", id: "prod-starter", category: "discord" },
             { name: "Serwer Standard", id: "prod-standard", category: "discord" },
@@ -1368,6 +1546,11 @@
             { name: "Miniaturka Prosta", id: "prod-mini-prosta", category: "thumbnails" },
             { name: "Miniaturka PRO", id: "prod-mini-prof", category: "thumbnails" },
             { name: "Skrypt Logowanie", id: "prod-skrypt-login", category: "scripts" },
+            
+            // --- NOWY PRODUKT GAMMA ---
+            { name: "Skrypt gamma", id: "prod-gamma", category: "scripts" },
+            // --------------------------
+
             { name: "Skrypt Custom", id: "prod-skrypt-custom", category: "scripts" }
         ];
 
@@ -1382,14 +1565,17 @@
             
             const filtered = products.filter(p => p.name.toLowerCase().includes(query));
             if (filtered.length > 0) {
+  
                 searchResults.style.display = 'block';
                 filtered.forEach(p => {
                     const div = document.createElement('div');
                     div.className = 'search-item';
-                    div.innerHTML = `<span>${p.name}</span> <span style="font-size:0.8em; opacity:0.7;">${p.category.toUpperCase()}</span>`;
+                    div.innerHTML 
+                        = `<span>${p.name}</span> <span style="font-size:0.8em; opacity:0.7;">${p.category.toUpperCase()}</span>`;
                     div.onclick = () => {
                         switchCategory(p.category);
                         setTimeout(() => {
+                      
                             const el = document.getElementById(p.id);
                             if(el) {
                                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1403,7 +1589,8 @@
                     };
                     searchResults.appendChild(div);
                 });
-            } else { searchResults.style.display = 'none'; }
+            } else { searchResults.style.display = 'none';
+            }
         });
 
         // --- NAWIGACJA I KATEGORIE ---
@@ -1433,11 +1620,13 @@
             const title = card.querySelector('.card-header h3').innerText;
             const price = card.querySelector('.price').innerText;
             const bodyContent = card.querySelector('.card-body').cloneNode(true);
+            
             // Czyszczenie klona
             const p = bodyContent.querySelector('.price'); if(p) p.remove();
             const img = bodyContent.querySelector('.product-img-source'); 
             let imgSrc = "";
-            if(img) { imgSrc = img.src; img.remove(); }
+            if(img) { imgSrc = img.src; img.remove();
+            }
             
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = price;
@@ -1456,10 +1645,12 @@
             setTimeout(() => {
                 modal.classList.remove('active');
                 modal.classList.remove('closing');
-            }, 300); // Wait for animation
+            }, 300);
+            // Wait for animation
         }
 
-        window.onclick = function(event) { if (event.target == modal) closeModal(); }
+        window.onclick = function(event) { if (event.target == modal) closeModal();
+        }
 
         // --- FAQ ACCORDION ---
         const faqItems = document.querySelectorAll('.faq-item');
@@ -1469,7 +1660,7 @@
                 item.classList.toggle('active');
             });
         });
-
+        
         // --- STATS ANIMATION (LICZNIKI) ---
         const counters = document.querySelectorAll('.counter-number');
         const speed = 200;
@@ -1479,15 +1670,18 @@
                 const updateCount = () => {
                     const target = +counter.getAttribute('data-target');
                     const count = +counter.innerText;
+          
                     const inc = target / speed;
                     if (count < target) {
                         counter.innerText = Math.ceil(count + inc);
                         setTimeout(updateCount, 20);
+        
                     } else {
                         counter.innerText = target;
                     }
                 };
                 updateCount();
+        
             });
         };
 
@@ -1501,6 +1695,7 @@
             // Reveal elements
             reveals.forEach((reveal) => {
                 const elementTop = reveal.getBoundingClientRect().top;
+     
                 if (elementTop < windowHeight - elementVisible) {
                     reveal.classList.add('active');
                 }
@@ -1508,15 +1703,17 @@
 
             // Trigger counters
             const statsSection = document.querySelector('.stats-section');
+      
             if(statsSection) {
                 const statsTop = statsSection.getBoundingClientRect().top;
                 if(statsTop < windowHeight - 50 && !countersTriggered) {
                     animateCounters();
                     countersTriggered = true;
+         
                 }
             }
         });
-
+        
         // --- MENU MOBILNE ---
         function toggleMobileMenu() {
             const links = document.getElementById('topLinks');
@@ -1569,7 +1766,8 @@
         setTimeout(() => {
             const popup = document.getElementById('adPopup');
             popup.classList.add('show');
-        }, 5000); // Popup po 5 sekundach
+        }, 5000);
+        // Popup po 5 sekundach
 
         function closeAd() {
             const popup = document.getElementById('adPopup');
@@ -1578,7 +1776,8 @@
                 popup.classList.remove('show');
                 popup.classList.remove('closing');
                 popup.style.display = 'none'; // Force hide
-            }, 500); // Wait for animation
+            }, 500);
+            // Wait for animation
         }
 
         // Trigger reveal on load
